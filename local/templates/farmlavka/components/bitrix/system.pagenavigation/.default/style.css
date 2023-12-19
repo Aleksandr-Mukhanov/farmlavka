@@ -1,0 +1,33 @@
+.pager {
+    overflow: hidden;
+    margin: 10px 0;
+    }
+    .pager li {
+    list-style: none;
+    float: left;
+    margin-right: 15px;
+    }
+    .pager li:last-child {
+    margin-right: 0;
+    }
+    .pager li a {
+    display: block;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    background: #395985;
+    font-size: 14px;
+    line-height: 26px;
+    color: #fff;
+    text-decoration: none;
+    }
+    .pager li span {
+    display: block;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    background: #e9751f;
+    font-size: 14px;
+    line-height: 26px;
+    color: #fff;
+    }

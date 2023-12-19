@@ -1,0 +1,119 @@
+@import "../scss/fonts_mixins.scss";
+@import "../bootstrap-5.2.0-beta1-dist/css/bootstrap.css";
+a {
+  text-decoration: none;
+}
+body {
+  min-width: 100%;
+  // height: 100%;
+  font-family: "cursive";
+  font-family: "Roboto-Regular";
+  font-size: 16px;
+  font-weight: 400;
+  color: $colorBlackLevel2;
+  line-height: 130%;
+  margin: 0 auto;
+  padding: 0;
+}
+a,
+a:hover,
+a:active,
+li,
+ul {
+  text-decoration: none;
+  list-style: none;
+  color: $colorBlackLevel2;
+}
+a {
+  cursor: pointer;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div {
+  margin: 0;
+  padding: 0;
+}
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+/* ********** container ************ */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 0 1;
+  position: relative;
+}
+.wrapper-top {
+  position: fixed;
+  bottom: 25px;
+  right: 55px;
+  width: max-content;
+  height: max-content;
+  z-index: 5;
+  @media (max-width: 768px) {
+    bottom: 10px;
+    right: 10px;
+  }
+}
+.wrapper-top__block {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: $BGButton;
+  object-position: center;
+  background-position: center;
+  background-image: url(../img/svg/h-top.svg);
+  background-repeat: no-repeat;
+}
+._container {
+  max-width: 1520px;
+  padding: 0px 15px;
+  // background-color: red;
+  margin: 0 auto;
+}
+.display-none {
+  display: none !important;
+}
+/* ***** global-style ***** */
+@import "global-style.scss";
+
+@import "header.scss";
+
+@import "popup.scss";
+@import "main-content.scss";
+@import "product-filter.scss";
+
+@import "categories.scss";
+@import "product-page.scss";
+@import "health-blog__categories.scss";
+@import "reviews-page.scss";
+@import "company-page.scss";
+@import "articles.scss";
+@import "delivery.scss";
+@import "contacts.scss";
+@import "payment.scss";
+@import "basket.scss";
+@import "personal-area.scss";
+@import "checkout.scss";
+@import "favorites.scss";
+@import "footer.scss";
+@import "font-size.scss";
+
+.font {
+  // @include fontBold(15px, 21px);
+}

@@ -1,0 +1,98 @@
+B<?
+ob_start();
+$_SERVER["DOCUMENT_ROOT"] = realpath(dirname(__FILE__)."/../../");
+//require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+use Bitrix\Main\EventManager;
+use Bitrix\Sale\Order;
+//use Bitrix\Main\Entity\UserTable;
+
+\Bitrix\Main\Loader::includeModule('sale');
+\Bitrix\Main\Loader::includeModule('main');
+//echo "running";
+//
+//$eventManager = EventManager::getInstance();
+//
+//$eventManager->addEventHandlerCompatible('sale', 'OnSaleOrderSaved', function(Order $order) {
+//    $orderFields = $order->getFieldValues();
+//
+//    // Путь к SFTP директории
+//    $directory = '/srv/sftp/sftp-user/';
+//echo "running";
+//    // Создаем массив данных заказа
+//    $uid = $orderFields['USER_ID'];
+//    if (!empty($uid)) {
+//
+//        $orderData = [
+//            'id' => $orderFields['ID'],
+//            'date' => $orderFields['DATE_INSERT']->toString(),
+//            'CustomerName' => $orderFields['USER_NAME'],
+//            'sum' => $orderFields['PRICE'],
+//        ];
+//        // Конвертируем массив в JSON строку
+//        $jsonString = json_encode($orderData);
+//
+//        // Создаем имя файла на основе ID заказа
+////        $filename = $directory . $orderFields['ID'] . '.json';
+//        $filename = $directory . '123123' . '.json';
+//
+//        // Записываем файл в указанную директорию
+////        if (file_put_contents($filename, $jsonString)) {
+//        if (file_put_contents($filename, 'jsonString')) {
+//            echo "Файл $filename успешно записан в директорию\n";
+//        } else {
+//            echo "Ошибка при записи файла $filename в директорию sftp\n";
+//        }
+//    }
+//
+//
+//});
+//$output = ob_get_clean();
+
+// тест вывод
+function dump($el){
+    global $USER;
+    if($USER->IsAdmin()){
+        echo "<pre>";print_r($el);echo "</pre>";
+    }
+}
+
+// формат цены
+function formatPrice($price){
+    $newPrice = number_format($price, 0, ',', ' ');
+    return $newPrice;
+}
+
+// очистка телефона
+function formatPhone($phone){
+    $newPhone = str_replace(['(',')','-',' '],'',$phone);
+    return $newPhone;
+}
+// получение списка свойства
+function getListProperty($arSort,$arFilter){ // USER_FIELD_ID
+    $rsField = CUserFieldEnum::GetList($arSort,$arFilter);
+    while($arField = $rsField->GetNext())
+        $arElements[$arField["ID"]]=$arField["VALUE"];
+
+    return $arElements;
+}
+// получение элементов HL-блока
+function getElHL($idHL,$order,$filter,$select){
+
+    $hlblock = \Bitrix\Highloadblock\HighloadBlockTable::getById($idHL)->fetch();
+    $entity = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock);
+    $entity_data_class = $entity->getDataClass();
+    $entity_table_name = $hlblock['TABLE_NAME'];
+    $sTableID = 'tbl_'.$entity_table_name;
+
+    $rsData = $entity_data_class::getList([
+        'order' => $order,
+        'filter' => $filter,
+        'select' => $select
+    ]);
+    $rsData = new CDBResult($rsData, $sTableID);
+
+    while($arRes = $rsData->Fetch()){
+        $arElements[$arRes['ID']] = $arRes;
+    }
+    return $arElements;
+}

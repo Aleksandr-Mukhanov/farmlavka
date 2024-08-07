@@ -18,6 +18,22 @@ if ($action == 'sendForm'){ // отправка заявки
   if (CEvent::Send($event, "s1", $mailFields)) echo '<p>Спасибо! Данные успешно отправлены!</p>';
   else echo '<p>Ошибка! Данные не отправлены!</p>';
 }
+elseif ($action == 'buyOne') // купить в 1 клик
+{
+    $mailFields = array(
+        "NAME" => $request->getPost('buyOneName'),
+        "PHONE" => $request->getPost('buyOnePhone'),
+        "PRODUCT" => $request->getPost('oneClickName'),
+        "PRICE" => $request->getPost('oneClickPrice'),
+        "QNT" => $request->getPost('quantity'),
+        "ID" => $request->getPost('productID'),
+        "PAGE" => $_SERVER['HTTP_REFERER'],
+        "IP" => $_SERVER['REMOTE_ADDR']
+    );
+    $event = 'SEND_BUY_ONE';
+    if (CEvent::Send($event, "s1", $mailFields)) echo '<p>Спасибо! Данные успешно отправлены!</p>';
+    else echo '<p>Ошибка! Данные не отправлены!</p>';
+}
 elseif ($action == 'sendAuth') // авторизация
 {
   $login = $request->getPost('login');

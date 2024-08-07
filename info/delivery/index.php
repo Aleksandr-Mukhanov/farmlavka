@@ -32,7 +32,8 @@ while($arStore = $rsStore->fetch())
   $arStores[] = $arStore;
 }
 // dump($arDeliveryAviable);
-?><div class="_container delivery-page" >
+?><div class="_container delivery-page">
+    <?/*?>
   <?$APPLICATION->IncludeComponent(
     "sotbit:regions.choose",
     "delivery",
@@ -177,6 +178,7 @@ while($arStore = $rsStore->fetch())
         </div>
     </div>
   </div>
+    <?*/?>
   <div class="delivery__d-pickup">
     <h2 class="main-title" >Самовывоз</h2>
   </div>
@@ -192,7 +194,8 @@ while($arStore = $rsStore->fetch())
           zoom: 8
         });
         // создание меток
-        <?foreach ($arStores as $store) {?>
+        <?foreach ($arStores as $store) {
+          if ($store['COORDINATES']){?>
           var myPlacemark = new ymaps.Placemark(
             [<?=$store['COORDINATES']?>], {
     				hintContent: '<?=$store['TITLE']?>',
@@ -201,7 +204,8 @@ while($arStore = $rsStore->fetch())
     			});
 
     			myMap.geoObjects.add(myPlacemark);
-        <?}?>
+          <?}
+        }?>
 
         $('.showInMap').click(function(){
           coordinates = $(this).attr('data-coordinates').split(',');
@@ -273,14 +277,18 @@ while($arStore = $rsStore->fetch())
     </div> -->
   </div>
   <div class="delivery__d-text">
-    <h3 class="d-text__title" >Условия самовывоза</h3>
-    <p class="articles__text" >Стоимость самовывоза — бесплатно <br>
-      Самовывоз из партнерских аптек при заказе от 500 руб.<br>
-      Заказ хранится 5 дней с момента доставки в пункт самовывоза
+    <h3 class="d-text__title">Условия самовывоза</h3>
+    <p class="articles__text">
+      Забрать собранный заказ вы можете в выбранной вами аптеке.
     </p>
-    <br>
-    <h3 class="d-text__title" >Порядок обмена/возврата</h3>
-    <p class="articles__text" >С другой стороны начало повседневной работы по формированию позиции обеспечивает широкому кругу (специалистов) участие в формировании направлений прогрессивного развития. Повседневная практика показывает, что рамки и место обучения кадров позволяет выполнять важные задания по разработке модели развития. овседневная практика показывает, что консультация с широким активом требуют от нас анализа позиций, занимаемых участниками в отношении поставленных задач. Идейные соображения высшего порядка, а также сложившаяся структура организации представляет собой интересный эксперимент проверки существенных финансовых и административных условий. Равным образом начало повседневной работы по формированию позиции позволяет оценить значение новых предложений.
+    <p class="articles__text">
+      Срок хранения заказа составляет 5 (пять) календарных дня с момента сборки заказа.
+    </p>
+    <p class="articles__text">
+      Если в заказе есть рецептурный препарат, не забудьте взять с собой рецепт.
+    </p>
+    <p class="articles__text">
+      Обязательно проверьте комплектность, целостность, сроки годности товара до оплаты. В случае несоответствия, вы вправе отказаться от заказа или оплатить заказ частично.
     </p>
   </div>
 </div>

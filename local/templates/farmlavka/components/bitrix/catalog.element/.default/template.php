@@ -19,7 +19,7 @@ $this->setFrameMode(true);
 if (isset($_COOKIE['favorites']))
 	$arFavorites = explode('-',$_COOKIE['favorites']);
 
-$favoritesActive = (in_array($arResult['ID'],$arFavorites)) ? 'active' : '';
+$favoritesActive = ($arFavorites && in_array($arResult['ID'],$arFavorites)) ? 'active' : '';
 ?>
 <section class="product-page">
 	<div class="_container">
@@ -77,7 +77,7 @@ $favoritesActive = (in_array($arResult['ID'],$arFavorites)) ? 'active' : '';
 									<div class="product-card__top">
 										<div class="stars second-block__item__stars product-card__start">
 											<?for ($i=0; $i < 5; $i++) {
-												$showStar = ($i < round($arResult['PROPERTIES']['RATING']['VALUE'])) ? 'star' : 'star-minus'; ?>
+												$showStar = ($arResult['PROPERTIES']['RATING']['VALUE'] && $i < round($arResult['PROPERTIES']['RATING']['VALUE'])) ? 'star' : 'star-minus'; ?>
 												<div class="svg star-small <?=$showStar?>"></div>
 											<?}?>
 										</div>
@@ -87,10 +87,10 @@ $favoritesActive = (in_array($arResult['ID'],$arFavorites)) ? 'active' : '';
 								<div class="characteristic__right" >
 									<div class="product-card__top">
 										<p class="product-card__available">
-											<?=($arResult['CAN_BUY']) ? 'Есть в наличии' : 'Нет в наличии'?>
+											<?=($arResult['ITEM_PRICES_CAN_BUY']) ? 'Есть в наличии' : 'Нет в наличии'?>
 										</p>
 										<p class="characteristic__reviews">
-											Артикуль
+											Артикул
 											<span class="characteristic__reviews__vendor-code"><?=$arResult['PROPERTIES']['ARTICLE']['VALUE']?></span>
 										</p>
 									</div>
@@ -111,21 +111,21 @@ $favoritesActive = (in_array($arResult['ID'],$arFavorites)) ? 'active' : '';
 							<div class="pp-right-card__body" >
 								<div class="pp-right-card__body__item-top">
 									<p>Актуальная цена</p>
-								<div class="product-card__price-block">
-									<div class="product-card__price">
-										<?if($arResult['ITEM_PRICES'][0]['DISCOUNT'] > 0):?>
-											<p class="product-card__price__2 fz-14px">
-												<?=$arResult['ITEM_PRICES'][0]['PRINT_BASE_PRICE']?>
+									<div class="product-card__price-block">
+										<div class="product-card__price">
+											<?if($arResult['ITEM_PRICES'][0]['DISCOUNT'] > 0):?>
+												<p class="product-card__price__2 fz-14px">
+													<?=$arResult['ITEM_PRICES'][0]['PRINT_BASE_PRICE']?>
+												</p>
+											<?endif;?>
+											<p class="product-card__price__1 fz-24px">
+												<?=$arResult['ITEM_PRICES'][0]['PRINT_PRICE']?>
 											</p>
-										<?endif;?>
-										<p class="product-card__price__1 fz-24px">
-											<?=$arResult['ITEM_PRICES'][0]['PRINT_PRICE']?>
-										</p>
+										</div>
+										<div class="svg product-card__busket favorite_border <?=$favoritesActive?> addFavorites" data-id="<?=$arResult['ID']?>" data-cookie="favorites"></div>
 									</div>
-									<div class="svg product-card__busket favorite_border <?=$favoritesActive?> addFavorites" data-id="<?=$arResult['ID']?>" data-cookie="favorites"></div>
 								</div>
-								</div>
-								<?if($arResult['CAN_BUY']):?>
+								<?if($arResult['ITEM_PRICES_CAN_BUY']):?>
 									<div class="counter-busket">
 										<div class="counter" >
 											<div class="counter__minus">-</div>
@@ -134,7 +134,7 @@ $favoritesActive = (in_array($arResult['ID'],$arFavorites)) ? 'active' : '';
 										</div>
 										<div class="button counter__butten cartAdd" data-id="<?=$arResult['ID']?>"><p>В корзину</p></div>
 									</div>
-									<a class="buscet__button myBtn" data-modal="myModal4" >Купить в 1 клик</a>
+									<a class="buscet__button myBtn buyOneClick" data-modal="myModal4" data-id="<?=$arResult['ID']?>" data-price="<?=$arResult['ITEM_PRICES'][0]['PRICE']?>" data-type="productCard">Купить в 1 клик</a>
 								<?else:?>
 									<button class="product-card__b-button b-button__not-available myBtn" data-modal="myModal8">
 										Сообщить о наличии

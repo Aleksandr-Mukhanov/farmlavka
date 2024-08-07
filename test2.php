@@ -2,7 +2,16 @@
 
 echo 'ok<br>';
 
+use Bitrix\Main\Loader,
+    Bitrix\Main\Context,
+    Bitrix\Currency\CurrencyManager,
+    Bitrix\Sale\Order,
+    Bitrix\Sale\Basket,
+    Bitrix\Sale\Delivery,
+    Bitrix\Sale\PaySystem;
+
 \Bitrix\Main\Loader::includeModule('sale');
+\Bitrix\Main\Loader::includeModule('catalog');
 
 // код купона, который следует применить к корзине
 $coupon = 'SL-5WFJS-EMD4IO2S';
@@ -30,3 +39,15 @@ $coupon = 'SL-5WFJS-EMD4IO2S';
 // // получаем результаты расчёта скидок для корзины
 // $result = $oDiscounts->getApplyResult();
 // dump($result);
+
+$orderID = 320;
+$order = Order::load($orderID);
+$paymentCollection = $order->getPaymentCollection();
+foreach ($paymentCollection as $payment) {
+  $psID = $payment->getPaymentSystemId(); dump($psID);
+  $paySystemObject = PaySystem\Manager::getObjectById($psID); // dump($paySystemObject);
+  $paySystemBufferedOutput = $paySystemObject->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);
+  dump($paySystemBufferedOutput);
+  $arDate['url_pay'] = $paySystemBufferedOutput->getTemplate();
+  dump($arDate);
+}

@@ -1,35 +1,46 @@
 <?php
-$_SERVER["DOCUMENT_ROOT"] = realpath(dirname(__FILE__)."/../../");
+$_SERVER["DOCUMENT_ROOT"] = realpath(dirname(__FILE__) . "/../../../dev.farmlavka.ru/");
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+
 CModule::IncludeModule('sale');
 
 function updateStatuses()
 {
-    $directory = '/home/back1c/ftp/orders/';
-    $filename = $directory . 'tests.json';
-    file_put_contents($filename, 'test text');
+//    $logfile = '/var/log/farmlavka_integration/statuses/status' . date("Y-m-d_H-i-s") . '.log';
+//    $file = fopen($logfile, 'a');
+//    $timestamp = date("Y-m-d H:i:s");
+//    if ($file === false) {
+//        die('Unable to open log file for writing.');
+//    }
+//    $logMessage = $timestamp . " начат процесс обработки статусов заказов" . PHP_EOL;
+//    fwrite($file, $logMessage);
+
     $directory = '/home/back1c/ftp/statuses/';
     // Получаем список файлов в директории
     $files = scandir($directory);
     $matchingFiles = preg_grep('/[\s\S]+\.json/', $files);
+//    $logMessage = $timestamp . " начат процесс обработки статусов заказов" . PHP_EOL;
+//    fwrite($file, $logMessage);
+//    echo $logMessage;
 
-//    $order = \Bitrix\Sale\Order::load(190);
-//    echo '   == ' . $order -> getField('STATUS_ID') . '    ' . $order -> getField('CANCELED') . '   ';
-
-
-    foreach ($matchingFiles as $file) {
-        if (is_file($directory . $file)) {
+    foreach ($matchingFiles as $filename) {
+        if (is_file($directory . $filename)) {
             // Чтение содержимого файла
-            $content = file_get_contents($directory . $file);
+            $content = file_get_contents($directory . $filename);
             $myRightJson = removeBOM($content);
             $data = json_decode($myRightJson);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                die('Ошибка при декодировании JSON: ' . json_last_error_msg());
+//                fwrite($file, 'Ошибка при декодировании JSON: ' . json_last_error_msg() . PHP_EOL);
+                continue;
             }
 
             $id = intval($data->id);
             $status = $data->status;
+
+//            $logMessage = $id . " заказ начал обработку..." . PHP_EOL;
+//            fwrite($file, $logMessage);
+
             // Находим заказ с таким id и меняем статус
             try {
                 $order = \Bitrix\Sale\Order::load($id);
@@ -38,25 +49,29 @@ function updateStatuses()
                         $order->setField('STATUS_ID', 'N');
                     } else if ($status == 'Canceled_by_farmacy') {
                         $order->setField('CANCELED', 'Y');
-                    }else if($status == 'delivery') {
+                        $order->setField('STATUS_ID', 'V');
+                    } else if ($status == 'delivery') {
                         $order->setField('STATUS_ID', 'DF');
-                    }else if($status == 'Completed') {
+                    } else if ($status == 'Completed') {
                         $order->setField('STATUS_ID', 'F');
                     }
                     $order->save(false);
                 } else {
-                    // Обработка ошибки, если заказ не был загружен
+//                    fwrite($file, 'Ошибка: заказ с id ' . $id . ' не найден.' . PHP_EOL);
                 }
             } catch (Exception $e) {
-                // Обработка ошибки, если произошло исключение при обновлении статуса
+//                fwrite($file, 'Ошибка при обработке заказа ' . $id . ': ' . $e->getMessage() . PHP_EOL);
             }
-
         }
     }
+
+//    fclose($file);
 }
 
 updateStatuses();
-function removeBOM($data) {
+
+function removeBOM($data)
+{
     if (0 === strpos(bin2hex($data), 'efbbbf')) {
         return substr($data, 3);
     }

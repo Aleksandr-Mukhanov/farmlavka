@@ -81,14 +81,14 @@
               </p>
             </a>
           </div>
-          <div class="footer__messages">
+          <!-- <div class="footer__messages">
             <a href="<?=$arSetting['vk']?>" class="svg footer__massege footer__massege-1" target="_blank"></a>
             <a href="<?=$arSetting['facebook']?>" class="svg footer__massege footer__massege-2" target="_blank"></a>
             <a href="<?=$arSetting['ok']?>" class="svg footer__massege footer__massege-3" target="_blank"></a>
             <a href="<?=$arSetting['twitter']?>" class="svg footer__massege footer__massege-4" target="_blank"></a>
             <a href="<?=$arSetting['instagram']?>" class="svg footer__massege footer__massege-5" target="_blank"></a>
             <a href="<?=$arSetting['youtube']?>" class="svg footer__massege footer__massege-6" target="_blank"></a>
-          </div>
+          </div> -->
         </div>
         <p class="footer__text">
           <?$APPLICATION->IncludeComponent(

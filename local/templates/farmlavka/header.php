@@ -44,10 +44,10 @@ use Bitrix\Main\Page\Asset,
   $basket = Basket::loadItemsForFUser($userID, $siteID);
   $basketCNT = array_sum($basket->getQuantityList());
 
-  if(isset($_COOKIE['favorites']))
-  	$arFavorites = explode('-',$_COOKIE['favorites']);
-
-  $sumFavorites = count($arFavorites);
+  if(isset($_COOKIE['favorites'])) {
+      $arFavorites = explode('-',$_COOKIE['favorites']);
+      $sumFavorites = count($arFavorites);
+  }
 
   // получим теги
   $rsPropertyEnum = CIBlockPropertyEnum::GetList(
@@ -157,11 +157,11 @@ use Bitrix\Main\Page\Asset,
             )
           );?>
           <div class="header__block__search">
-            <div class="header__messages">
+            <!-- <div class="header__messages">
               <a href="<?=$arSetting['vk']?>" class="svg header__message header__message-1" target="_blank"></a>
               <a href="<?=$arSetting['instagram']?>" class="svg header__message header__message-2" target="_blank"></a>
               <a href="<?=$arSetting['youtube']?>" class="svg header__message header__message-3" target="_blank"></a>
-            </div>
+            </div> -->
             <div class="header__contacts">
               <div class="header__contact__item">
                 <a href="mailto:<?=$arSetting['email']?>" class="header__contact">
@@ -235,7 +235,7 @@ use Bitrix\Main\Page\Asset,
             <div class="slider">
               <div class="slider-list grab header-bottom__desktop">
                 <div class="slider-track">
-                  <div class="slide header__bottom-item header__bottom-item__first">
+                  <!-- <div class="slide header__bottom-item header__bottom-item__first">
                     <a href="/catalog/lekarstva/?tag=action" class="header__bottom-item__text header__bottom-item__first">
                       <span class="header__bottom-item__svg">%</span>Акция
                     </a>
@@ -244,7 +244,7 @@ use Bitrix\Main\Page\Asset,
                     <a href="/catalog/lekarstva/?tag=sale" class="header__bottom-item__text">
                       <span class="header__bottom-item__svg">₽</span>Скидки
                     </a>
-                  </div>
+                  </div> -->
 
                   <?foreach ($arTag as $key => $value) {?>
                     <div class="slide slide__header_1 header__bottom-item">
@@ -351,7 +351,7 @@ use Bitrix\Main\Page\Asset,
             <div class="slider">
               <div class="slider-list">
                 <div class="slider-track">
-                  <div class="slide header__bottom-item header__bottom-item__first">
+                  <!-- <div class="slide header__bottom-item header__bottom-item__first">
                     <a href="/catalog/lekarstva/?tag=action" class="header__bottom-item__text header__bottom-item__first">
                       <span class="header__bottom-item__svg">%</span>Акция
                     </a>
@@ -360,7 +360,7 @@ use Bitrix\Main\Page\Asset,
                     <a href="/catalog/lekarstva/?tag=sale" class="header__bottom-item__text">
                       <span class="header__bottom-item__svg">₽</span>Скидки
                     </a>
-                  </div>
+                  </div> -->
 
                   <?foreach ($arTag as $key => $value) {?>
                     <div class="slide slide__header_1 header__bottom-item">

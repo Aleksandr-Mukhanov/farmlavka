@@ -192,7 +192,7 @@ else
 				foreach ($arBrand as $brand) {?>
 				<li class="brand__item">
 					<a href="?brand=<?=$brand['UF_XML_ID']?>" class="brand__item__body <?=($brand['UF_XML_ID'] == $_REQUEST['brand'])?'active':''?>">
-						<?=$brand['UF_NAME']?>
+						<?=mb_strimwidth($brand['UF_NAME'], 0, 15, '...');?>
 					</a>
 				</li>
 			<?}
@@ -765,6 +765,8 @@ if (ModuleManager::isModuleInstalled("sale"))
 	}
 }
 ?>
+
+<?/*?>
 <section class="company ">
 	<div class="_container">
 		<h2 class="main-title">Сео текст</h2>
@@ -881,6 +883,7 @@ if (ModuleManager::isModuleInstalled("sale"))
 		</div>
 	</div>
 </section>
+<?*/?>
 
 <?$APPLICATION->IncludeComponent("bitrix:news.list", "blog_index", Array(
 	"ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты

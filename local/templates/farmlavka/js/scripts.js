@@ -32,6 +32,13 @@ function setCookie(cookieName, elementID, headerID) {
   $('#' + headerID).text(cntHeader); // обновим в шапке
 }
 
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
 $(document).ready(function(){
 
   // маска на телефон
@@ -44,10 +51,10 @@ $(document).ready(function(){
   });
 
   // показать текст
-  $('.reviews__href').click(function(){
-    event.preventDefault();
-    $(this).parent().parent().find('.block_hide').slideToggle();
-  });
+  // $('.reviews__href').click(function(){
+  //   event.preventDefault();
+  //   $(this).parent().parent().find('.block_hide').slideToggle();
+  // });
 
   // отправка промокода
   $(".promo-code__search").submit(function() {
@@ -141,7 +148,7 @@ $(document).ready(function(){
         type: 'post',
         data: { action: 'cart_add', productID: productID, quantity: quantity },
         success: function (result) {
-          // console.log(result);
+          console.log(result);
           // form.html(result);
         }
     });
@@ -300,21 +307,38 @@ $(document).ready(function(){
   $('.buyOneClick').click(function(){
     productID = $(this).attr('data-id');
     productPrice = $(this).attr('data-price');
-    price = $(this).parents('.product-card').find('.product-card__price').html();
-    // console.log(productID);
+    productType = $(this).attr('data-type');
+
+    if (productType == 'productCard') { // если карточка
+      title = $('h1.main-title').text();
+      image = $('.product-page .img-bl__big-img__block img').attr('src');
+      price = $('.product-page .product-card__price').html();
+    } else { // каталог
+      productCard = $(this).parents('.product-card');
+      title = productCard.find('.product-card__title').text();
+      image = productCard.find('.product-card__img a img').attr('src');
+      price = productCard.find('.product-card__price').html();
+    }
+
+    // заполним
+    $('.buyOneSend').attr('data-id',productID);
+    $('.buyOneSend').attr('data-price',productPrice);
+    $('#oneClickName').text(title);
+    $('#oneClickIMG').attr('src',image);
+    $('#oneClickPrice').html(price);
     $.ajax({
         url: '/local/ajax/getInfo.php',
         type: 'post',
         data: { action: 'infoProduct', productID: productID },
         success: function (result) {
+          // console.log(result)
           arResult = JSON.parse(result);
-          // console.log(arResult);
-          $('.buyOneSend').attr('data-id',productID);
-          $('.buyOneSend').attr('data-price',productPrice);
-          $('#oneClickName').text(arResult.NAME);
-          $('#oneClickIMG').attr('src',arResult.PICTURE);
+          // $('.buyOneSend').attr('data-id',productID);
+          // $('.buyOneSend').attr('data-price',productPrice);
+          // $('#oneClickName').text(arResult.NAME);
+          // $('#oneClickIMG').attr('src',arResult.PICTURE);
           $('#oneClickRating').html(arResult.RATING);
-          $('#oneClickPrice').html(price);
+          // $('#oneClickPrice').html(price);
         }
     });
   });
@@ -329,7 +353,7 @@ $(document).ready(function(){
     oneClickPrice = $(this).attr('data-price');
     blockResult = $(this).parent().parent();
     $.ajax({
-        url: '/local/ajax/order.php',
+        url: '/local/ajax/sendForm.php',
         type: 'post',
         data: {
           action: 'buyOne',
@@ -342,7 +366,7 @@ $(document).ready(function(){
         },
         success: function (result) {
           // console.log(result);
-          blockResult.text(result);
+          blockResult.html(result);
         }
     });
   });
@@ -448,6 +472,41 @@ $(document).ready(function(){
       "scrollTop": $('.ch-order__table').offset().top
     }, "slow");
     $('#modalOutStock').show();
+  });
+
+  // показ платежной системы при выборе склада
+  var cityName = $('#cityName').val();
+  var paySystemTetra = $('#paySystem_4');
+  var paySystemSaidana = $('#paySystem_5');
+
+  function paySystemShow(paySystem){
+    if (paySystem == 2) {
+      paySystemTetra.prop('checked', false).parent().hide();
+      paySystemSaidana.parent().show();
+    } else {
+      paySystemSaidana.prop('checked', false).parent().hide();
+      paySystemTetra.parent().show();
+    }
+  }
+
+  if (cityName == 'Егорьевск')
+    paySystemShow(2);
+  else
+    paySystemShow(1);
+
+  $('input[name=STORE]').change(function(){
+    storeVal = $(this).val(); // console.log(storeVal);
+    switch(storeVal){
+      case 'Зелинского 6': paySystem = 2; break;
+      case 'Коломенская 5В': paySystem = 2; break;
+      case 'Ломоносова 107Б': paySystem = 2; break;
+      case 'Менделеева 5': paySystem = 2; break;
+      case 'Мкр.5-ый 16': paySystem = 2; break;
+      case 'Победы 12': paySystem = 2; break;
+      case 'Центральная 9А': paySystem = 2; break;
+      default: paySystem = 1; break;
+    }
+    paySystemShow(paySystem);
   });
 });
 

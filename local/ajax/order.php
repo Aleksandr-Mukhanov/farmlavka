@@ -70,6 +70,7 @@ elseif ($action == 'buyOne') // купить в один клик
 {
     $userID = Sale\Fuser::getId();
 
+    print_r("from one click");
     $siteID = Bitrix\Main\Context::getCurrent()->getSite();
     $currencyCode = CurrencyManager::getBaseCurrency();
 
@@ -129,9 +130,8 @@ elseif ($action == 'buyOne') // купить в один клик
     if (!$result->isSuccess()) {
         echo 'Ошибка создания заказа: '.$result->getErrors();
     }else {
-        echo 'Заказ ' . $order->GetId() . ' создан успешно!';
+        echo 'Заказ ' . $order->GetId() . ' создан успешно order!';
     }
-
     $siteId = \Bitrix\Main\Context::getCurrent()->getSite();
     $storeId = ""; // Задайте значение по умолчанию
 
@@ -173,20 +173,24 @@ elseif ($action == 'buyOne') // купить в один клик
     }
 
     $jsonString = json_encode($orderData);
-    $directory = '/srv/sftp/sftp-user/';
+    $directory = '/home/back1c/ftp/orders/';
     $filename = $directory . $order->GetId() . '.json';
 
-//    if (file_put_contents($filename, $jsonString)) {
-//        echo "Файл $filename успешно записан в директорию SFTP\n";
-//    } else {
-//        $lastError = error_get_last();
-//        echo "Ошибка при записи файла $filename в директорию SFTP: " . $lastError['message'] . "\n";
-//    }
 }
 elseif ($action == 'orderCancel') // отмена заказа
 {
-  $order = \Bitrix\Sale\Order::load($_REQUEST['orderID']);
-  $order->setField("CANCELED","Y");
-  $order->setField('STATUS_ID',"V"); //статус
-  $order->save();
+    $order = \Bitrix\Sale\Order::load($_REQUEST['orderID']);
+    $order->setField("CANCELED","Y");
+    $order->setField('STATUS_ID',"V"); //статус
+    $order->save();
+    $orderId = $order->GetId();
+    $directory = '/home/back1c/ftp/cancelledByClient/';
+    $filename = $directory . $orderId . '.json';
+    $testData = [
+        'id' => $orderId,
+        'status' => 'canceled_by_client',
+        'from' => 'order'
+    ];
+    $jsonString = json_encode($testData, JSON_UNESCAPED_UNICODE);
+    file_put_contents($filename, $jsonString);
 }

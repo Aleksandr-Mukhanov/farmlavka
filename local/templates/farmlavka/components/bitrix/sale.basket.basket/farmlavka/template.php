@@ -107,7 +107,9 @@ if (empty($arResult['ERROR_MESSAGE']))
 								<div class="b-order__right" >
 									<div class="product-card__block__img b-order__block-img">
 										<div class="product-card__img order__left__img b-order__img-item ">
-											<img class="b-order__img" src="<?=$item['IMAGE_URL']?>" alt="<?=$item['NAME']?>">
+											<a href="<?=$item['DETAIL_PAGE_URL']?>">
+												<img class="b-order__img" src="<?=$item['IMAGE_URL']?>" alt="<?=$item['NAME']?>">
+											</a>
 										</div>
 									</div>
 									<div class="order__right">
@@ -123,7 +125,9 @@ if (empty($arResult['ERROR_MESSAGE']))
 											</div>
 										</div>
 										<p class="product-card__title fz-16px">
-											<?=$item['NAME']?>
+											<a href="<?=$item['DETAIL_PAGE_URL']?>">
+												<?=$item['NAME']?>
+											</a>
 										</p>
 										<ul class="product-card__ul">
 											<?foreach ($arProp as $name => $value) {?>

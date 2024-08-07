@@ -1,7 +1,7 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
 
-$arCapabilities = getElHL(6,[],[],['*']); // Возможности
+$arCapabilities = getElHL(6,[],['UF_ACTIVE'=>true],['*']); // Возможности
 $arHowWorking= getElHL(10,[],[],['*']); // Как мы работаем
 ?>
 
@@ -260,7 +260,7 @@ $rating = round($scoreSum / count($arReview),2);
 							Общий рейтинг на основе <?=count($arReview)?> отзывов наших покупателей
 						</p>
 						<div class="reviews-left__button-block">
-							<a href="/reviews/#feedbackAdd" class="button reviews__button">
+							<a href="/info/reviews/#feedbackAdd" class="button reviews__button">
 								Оставить отзыв</a>
 						</div>
 					</div>
@@ -288,7 +288,7 @@ $rating = round($scoreSum / count($arReview),2);
 						</li>
 					<?}?>
 				</ul>
-				<a href="/reviews/" class="reviews__href">
+				<a href="/info/reviews/" class="reviews__href">
 					<div class="svg reviews__href__svg"></div>
 					<p class="reviews__href__text">Все <?=count($arReview)?> отзывов</p>
 				</a>
@@ -297,7 +297,7 @@ $rating = round($scoreSum / count($arReview),2);
 	</div>
 </section>
 
-<?$arPartner = getElHL(7,[],[],['*']);?>
+<?/*$arPartner = getElHL(7,[],[],['*']);?>
 <section class="partners ">
 	<div class="_container product_container">
 		<div class="product__body partners__body">
@@ -330,6 +330,7 @@ $rating = round($scoreSum / count($arReview),2);
 		</div>
 	</div>
 </section>
+<?*/?>
 
 <section class="company ">
 	<div class="_container">

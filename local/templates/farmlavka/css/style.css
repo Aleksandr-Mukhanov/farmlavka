@@ -3077,7 +3077,7 @@ input::placeholder {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[5];
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   -ms-grid-rows: 1fr;
   grid-template-rows: 1fr;
   padding: 50px 0;
@@ -3393,9 +3393,6 @@ input::placeholder {
 .product-card__img {
   position: relative;
 }
-.product-card__img img {
-  max-height: 160px;
-}
 
 .product-card__img .label__day_product {
   position: absolute;
@@ -3419,7 +3416,9 @@ input::placeholder {
 }
 
 .product-card__img img {
-  height: auto;
+  /* height: auto; */
+  height: 160px;
+  max-height: 160px;
   width: 100%;
   -o-object-fit: contain;
      object-fit: contain;
@@ -4323,6 +4322,23 @@ input::placeholder {
   font-size: 14px;
   line-height: 180%;
   font-weight: 400;
+}
+ul.company__text li{
+  position: relative;
+  padding-left: 20px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  color: black;
+}
+ul.company__text li::after {
+  position: absolute;
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: 1px solid #2fd3ae;
+  top: 11px;
+  left: 0px;
+  border-radius: 50%;
 }
 
 .company__block-5 {
@@ -7084,8 +7100,8 @@ section.range-slider input[type=range]::-moz-focus-outer {
 .img-bl__big-img__block img {
   width: 80% !important;
   height: 80% !important;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .pp-content__pp-info {
@@ -8863,6 +8879,13 @@ section.range-slider input[type=range]::-moz-focus-outer {
   grid-gap: 30px;
 }
 
+.company-page__text-block.page__text,
+.company-page__text-block .page__text{
+  font-size: 18px;
+  color: black;
+  line-height: 175%;
+}
+
 .company-page__text {
   font-family: "Roboto-Regular";
   font-size: 18px;
@@ -9111,6 +9134,10 @@ section.range-slider input[type=range]::-moz-focus-outer {
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+.cp-license__block a img{
+  width: 24%;
 }
 
 .cp-license__img {
@@ -9863,9 +9890,9 @@ section.range-slider input[type=range]::-moz-focus-outer {
   }
 
   .a-content-main__left {
-    -webkit-box-ordinal-group: 2;
+    /* -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
-            order: 1;
+            order: 1; */
   }
 
   .tag {

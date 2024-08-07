@@ -37,17 +37,17 @@ if (isset($arResult['ITEM']))
 	  <div class="product-card__body">
 	    <div class="product-card__top">
 	      <p class="product-card__available fz-12px">
-	        <?=($item['CAN_BUY'])?'Есть в наличии':'Нет в наличии'?>
+	        <?=($item['ITEM_PRICES_CAN_BUY'])?'Есть в наличии':'Нет в наличии'?>
 	      </p>
 	      <div class="stars second-block__item__stars product-card__start">
 					<?for ($i=0; $i < 5; $i++) {
-						$showStar = ($i < round($item['PROPERTIES']['RATING']['VALUE'])) ? 'star' : 'star-minus'; ?>
+						$showStar = ($item['PROPERTIES']['RATING']['VALUE'] && $i < round($item['PROPERTIES']['RATING']['VALUE'])) ? 'star' : 'star-minus'; ?>
 						<div class="svg star-small <?=$showStar?>"></div>
 					<?}?>
 	      </div>
 	    </div>
       <a href="<?=$item['DETAIL_PAGE_URL']?>" class="product-card__title fz-16px">
-				<?=$item['NAME']?>
+				<?=mb_strimwidth($item['NAME'], 0, 70, '...');?>
 			</a>
 	    <ul class="product-card__ul">
 				<?foreach ($item['DISPLAY_PROPERTIES'] as $prop) {?>
@@ -70,13 +70,13 @@ if (isset($arResult['ITEM']))
 		        </p>
 					<?endif;?>
 	      </div>
-				<?if($item['CAN_BUY']):?>
+				<?if($item['ITEM_PRICES_CAN_BUY']):?>
 	      	<div class="svg product-card__busket cartAdd" data-id="<?=$item['ID']?>"></div>
 				<?endif;?>
 	    </div>
 	  </div>
 	  <div class="product-card__bottom">
-			<?if($item['CAN_BUY']):?>
+			<?if($item['ITEM_PRICES_CAN_BUY']):?>
 		    <button class="product-card__b-button myBtn buyOneClick" data-modal="myModal4" data-id="<?=$item['ID']?>" data-price="<?=$item['ITEM_PRICES'][0]['PRICE']?>">
 		      Купить в 1 клик
 		    </button>

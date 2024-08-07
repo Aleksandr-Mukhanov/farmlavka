@@ -6,7 +6,7 @@ use Bitrix\Main\Loader;
 $request = $context->getRequest();
 $action = $request->getPost('action');
 $productID = $request->getPost('productID');
-$productID = 1;
+// $productID = 1;
 
 $arOrder = ['SORT'=>'ASC'];
 $arFilter = ['IBLOCK_ID'=>1,'ID'=>$productID];
@@ -17,8 +17,8 @@ if ($arElement = $rsElements->Fetch()) {
   for ($i=0; $i < 5; $i++) {
     $showStar = ($i < round($arElement['PROPERTY_RATING_VALUE'])) ? 'star' : 'star-minus';
     $ratingHTML .= '<div class="svg star-small '.$showStar.'"></div>';
-    ?>
-  <?}
+  }
+
 	$arResult = [
     'NAME' => $arElement['NAME'],
     'PICTURE' => \CFile::GetPath($arElement['PREVIEW_PICTURE']),

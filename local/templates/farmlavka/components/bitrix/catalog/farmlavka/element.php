@@ -398,7 +398,7 @@ $isSidebar = ($arParams['SIDEBAR_DETAIL_SHOW'] == 'Y' && !empty($arParams['SIDEB
 	<section class="product product_pp ">
 		<div class="_container product_container">
 			<div class="product__body">
-				<h2 class="main-title" id="block_variants">Формы выпуска <span class="pp-suptitle"><?=count($arrFilterRelease['ID'])?></span></h2>
+				<h2 class="main-title" id="block_variants">Формы выпуска <span class="pp-suptitle"><?=$arrFilterRelease['ID']?></span></h2>
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:catalog.section",
 					".default",

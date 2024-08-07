@@ -2,84 +2,70 @@
 $aMenuLinks = Array(
 	Array(
 		"О компании", 
-		"", 
+		"/info/about/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Обратная связь", 
-		"", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Доставка", 
-		"", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Реклама на сайте", 
-		"", 
+		"Контакты", 
+		"/info/contacts/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Самовывоз из аптек", 
-		"", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Франшиза", 
-		"", 
+		"/info/delivery/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Оплата", 
-		"", 
+		"/info/payment/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Вакансии", 
-		"", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Юридическим лицам", 
-		"", 
+		"/info/vakancy/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Политика конфиденциальности", 
-		"", 
+		"/info/privacy/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Лицензия", 
-		"", 
+		"/info/license/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Пользовательское соглашение", 
-		"", 
+		"/info/agreement/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Сотрудничество", 
+		"/info/cooperation/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Арендодателям", 
+		"/info/renter/", 
 		Array(), 
 		Array(), 
 		"" 

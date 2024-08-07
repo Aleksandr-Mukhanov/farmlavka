@@ -463,6 +463,7 @@ COLOR
 	display: block;
 	text-align: left;
 	margin-left: 15px;
+	overflow-y: hidden;
 }
 /*
 * 	BTN

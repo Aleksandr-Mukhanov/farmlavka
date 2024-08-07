@@ -1,9 +1,10 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 global $USER;
-// dump($arResult['STORES_AVAIL']);
+// dump($arResult['BASKET']);
 ?>
 <div class="_container checkout">
 	<div class="checkout__body">
+    <input type="hidden" value="<?=$_SESSION["SOTBIT_REGIONS"]["NAME"]?>" id="cityName">
 		<?if($arResult['PRICE'] && !$_REQUEST['SEND_ORDER']):?>
 			<form class="checkout__left" method="post">
 				<div class="ch-main ">
@@ -48,6 +49,7 @@ global $USER;
 												<?=$arItem['NAME']?>
 												<span class="store-avail" id="store-avail-<?=$itemID?>">***</span>
 											</a>
+											<span>(<?=round($arItem['QUANTITY'])?> шт)</span>
 										</p>
 									</div>
 									</div>
@@ -55,12 +57,12 @@ global $USER;
 								<td class="ch-order__td" >
 									<div class="product-card__price ch-order__price">
 										<p class="product-card__price__1 ch-order__card_1 fz-24px">
-											<?=formatPrice($arItem['PRICE'])?> ₽
+											<?=formatPrice($arItem['QUANTITY'] * $arItem['PRICE'])?> ₽
 										</p>
 										<?if($arItem['DISCOUNT_PRICE'] > 0):?>
 											<div class="ch-order__card_2" >
 												<p class="product-card__price__2 ch-order__card_2__text fz-14px">
-													<?=formatPrice($arItem['BASE_PRICE'])?> ₽
+													<?=formatPrice($arItem['QUANTITY'] * $arItem['BASE_PRICE'])?> ₽
 												</p>
 											</div>
 										<?endif;?>
@@ -182,17 +184,27 @@ global $USER;
 									<th class="address__th">ЧАСЫ РАБОТЫ</th>
 									<th class="address__th">ТЕЛЕФОН</th>
 								</tr>
-
 	              <?foreach ($arResult['STORES'] as $store) {
-									$disabled = (count($arResult['STORES_AVAIL'][$store['ID']]) == count($arResult['BASKET'])) ? '' : 'disabled';?>
+										// соберем наличие
+										foreach ($arResult['STORES_AVAIL'][$store['ID']] as $productID => $productQNT)
+										{
+											// прибавим наличие на складах поставщиков
+											foreach ($arResult['STORES_ALWAYS'] as $storeID)
+												$productQNT += $arResult['STORES_AVAIL'][$storeID][$productID];
+
+											if ((int)$productQNT >= (int)$arResult['BASKET'][$productID]['QUANTITY'])
+												$arProductAvail[] = $productID;
+										}
+										$disabled = ($arProductAvail && (count($arProductAvail) == count($arResult['BASKET']))) ? '' : 'disabled';
+								?>
 	                <tr class="address__tr__body available_<?=$store['UF_AVAILABLE']?>">
 	                  <td class="address__td-body">
 	                    <div class="address__td__block" >
                         <div class="address__td__choose">
-													<input type="radio" name="STORE" id="store_<?=$store['ID']?>" value="<?=$store['TITLE']?>" class="<?=($disabled)?'store-disabled':''?>" data-product=<?=implode(',',$arResult['STORES_AVAIL'][$store['ID']])?>>
-													<label for="store_<?=$store['ID']?>" class="address__td-text"><?=$store['TITLE']?></label>
-													<span class="<?=$disabled?>" title="В этой аптеке можно забрать все товары">✔</span>
-													<span class="<?=$disabled?> not" title="В этой аптеке доступны не все товары">𐄂</span>
+                          <input type="radio" name="STORE" id="store_<?=$store['ID']?>" value="<?=$store['TITLE']?>" class="<?=($disabled)?'store-disabled':''?>" data-product=<?=($arProductAvail)?implode(',',$arProductAvail):''?>>
+                          <label for="store_<?=$store['ID']?>" class="address__td-text"><?=$store['TITLE']?></label>
+                          <span class="<?=$disabled?>" title="В этой аптеке можно забрать все товары">✔</span>
+                          <span class="<?=$disabled?> not" title="В этой аптеке доступны не все товары">𐄂</span>
                         </div>
 	                    </div>
 	                  </td>
@@ -205,7 +217,7 @@ global $USER;
 	                    <div class="address__td__block" >
 	                      <div class="address__td-bank">
 	                        <!-- <img src="./img/svg/bank-2.svg" class="address__td-img" width="90px" height="16px" > -->
-	                        <?=implode(', ', $store['UF_CARD_NAME'])?>
+	                        <?=($store['UF_CARD_NAME'])?implode(', ', $store['UF_CARD_NAME']):''?>
 	                      </div>
 	                    </div>
 	                  </td>
@@ -230,7 +242,8 @@ global $USER;
 	                    </div>
 	                  </td>
 	                </tr>
-	              <?}?>
+		              <?unset($arProductAvail);
+								}?>
 							</table>
 							<!-- <div class="block__button address__bottom-btn">
 								<a href="#" class="button__link">
@@ -305,7 +318,10 @@ global $USER;
 		<?else:?>
 			<div class="bx-sbb-empty-cart-container" style="text-align: center;">
 				<?if($arResult['RESULT']):?>
-					<br><hr><h2 class="article-suptitle"><?=$arResult['RESULT']?></h2><hr><br>
+					<br><hr>
+					<h2 class="article-suptitle"><?=$arResult['RESULT']?></h2>
+					<hr><br>
+					<div><?=$arResult['PAYMENT_TEMPLATE']?></div>
 				<?endif;?>
 				<div class="bx-sbb-empty-cart-image">
 					<img src="/local/templates/farmlavka/components/bitrix/sale.basket.basket/farmlavka/images/empty_cart.svg" alt="">

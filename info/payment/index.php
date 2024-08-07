@@ -1,6 +1,6 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Оплата");?>
-<div class="_container payment__p-main">
+<!-- <div class="_container payment__p-main">
   <p class="company-page__text">Сеть социальных аптек СТОЛИЧКИ является частью аптечного холдинга Неофарм. Первая аптека в Москве была открыта в 2000 году. Наша миссия с первого дня была проста: сделать лекарства доступными по цене. Мы максимально сократили путь медикаментов от производителя к потребителю. Сотрудничая напрямую с производителями и дистрибьюторами, мы не только предоставляем лекарства по низким ценам, а также гарантируем подлинность товаров.</p>
   <div class="sli">
     <div class="swiper-container swiper-capabilities swiper-container-initialized swiper-container-horizontal">
@@ -266,5 +266,5 @@ $APPLICATION->SetTitle("Оплата");?>
       </p>
     </div>
   </div>
-</div>
+</div> -->
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

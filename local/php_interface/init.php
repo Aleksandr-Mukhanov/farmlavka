@@ -37,7 +37,6 @@ function getListProperty($arSort, $arFilter)
 // получение элементов HL-блока
 function getElHL($idHL, $order, $filter, $select)
 {
-
     $hlblock = \Bitrix\Highloadblock\HighloadBlockTable::getById($idHL)->fetch();
     $entity = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock);
     $entity_data_class = $entity->getDataClass();
@@ -60,6 +59,8 @@ function getElHL($idHL, $order, $filter, $select)
 
 // слушатель для отправки заказа на SFTP-сервер после создания заказа
 use Bitrix\Main;
+use Bitrix\Catalog\StoreTable;
+use Bitrix\Catalog\StoreProductTable;
 
 Main\EventManager::getInstance()->addEventHandler(
     'sale',
@@ -74,7 +75,8 @@ function sendingAnOrderToSFTP(Main\Event $event)
     $order = $event->getParameter("ENTITY");
     $isNew = $event->getParameter("IS_NEW");
     $directory = '/home/back1c/ftp/orders/';
-//    $directory = '/srv/sftp/sftp-user/orders/';
+    //$directory = '/home/back1c/ftp/newOrders/';
+//    $directory = '/home/back1c/ftp/cancelledByClient/';
     $uid = $order->getUserId();
     $User = CUser::GetByID($uid);
 
@@ -88,16 +90,6 @@ function sendingAnOrderToSFTP(Main\Event $event)
 
         $saleOrder = Bitrix\Sale\Order::load($orderId);
         $shipmentCollection = $saleOrder->getShipmentCollection();
-        $idstore = '';
-        foreach ($shipmentCollection as $shipment) {
-            if (!$shipment->isSystem()) {
-//                $arResult['originalDeliveryId'] = $shipment->getDeliveryId();
-//                $arResult['customPriceDelivery'] = $shipment->getField('CUSTOM_PRICE_DELIVERY');
-//                $arResult['basePrice'] = $shipment->getField('BASE_PRICE_DELIVERY');
-                $idstore = $shipment->getStoreId();
-                break;
-            }
-        }
 
         foreach ($propertyCollection as $item) {
             if ($item['CODE'] === 'EMAIL') {
@@ -116,73 +108,83 @@ function sendingAnOrderToSFTP(Main\Event $event)
             'ClientFIO' => $fio,
             'Mail' => $email,
             'ClientPhoneNumber' => $phone,
-            'idstore' => $idstore . '',
-            'Gender' => $userProp['PERSONAL_GENDER'],
-            'moving' => '0'
+            'idstore' => $order->getField('USER_DESCRIPTION'),
+//            'Gender' => $userProp['PERSONAL_GENDER'],
         ];
 
         // Получение списка товаров заказа
         $orderItems = $order->getBasket()->getBasketItems();
         foreach ($orderItems as $item) {
+            // Получаем данные о товаре из заказа
             $productName = $item->getField("NAME");
             $productPrice = $item->getField("PRICE");
             $productQuantity = intval($item->getField("QUANTITY"));
             $productId = $item->getField("PRODUCT_ID");
             $productSum = $productPrice * $productQuantity;
+            // Получаем идентификатор склада из заказа
+            $storeId = $order->getField('USER_DESCRIPTION');
+            // Получаем данные о складе
+            $storeData = StoreTable::getList([
+                'filter' => ['ID' => $storeId],
+            ])->fetch();
+            $moving = 0;
+
+            if ($storeData) {
+                // Преобразуем строковый идентификатор склада в числовой формат, если необходимо
+                $storeId = intval($storeId);
+
+                // Получаем данные о продуктах на конкретном складе
+                $rsStoreProduct = StoreProductTable::getList([
+                    'filter' => [
+                        '=PRODUCT_ID' => $productId,
+                        '=STORE_ID' => $storeId,
+                        'STORE.ACTIVE' => 'Y',
+                    ],
+                ]);
+                // Переменная для хранения общего количества товара на складе
+                $totalStockQuantity = 0;
+
+                // Перебираем результаты запроса
+                while ($storeProduct = $rsStoreProduct->fetch()) {
+                    // Суммируем количество товара на складе
+                    $totalStockQuantity += $storeProduct['AMOUNT'];
+                }
+                if($totalStockQuantity - $productQuantity >= 0){
+                    $moving = 0;
+                }else{
+//                    $moving = $productQuantity - $totalStockQuantity;
+                    $moving = 1;
+                }
+            }else{
+                $moving = 1;
+            }
+
             $orderData['products'][] = [
                 'idproduct' => $productId,
                 'sum' => $productSum,
-                // 'bonus_points' => $bonusPoints,
                 'name' => $productName,
                 'price' => $productPrice,
                 'count' => $productQuantity,
+                'moving' => $moving
             ];
+
         }
 
         $filename = $directory . $order->getId() . '.json';
         $jsonString = json_encode($orderData, JSON_UNESCAPED_UNICODE);
         file_put_contents($filename, $jsonString);
     }
-
 }
-
-
-// слушатель для отправки заказа на SFTP-сервер после создания заказа
-//use Bitrix\Sale\Order;
-//
-//\Bitrix\Main\EventManager::getInstance()->addEventHandler(
-//    'sale',
-//    'OnSaleOrderEntitySaved',
-//    'OnStatusChange'
-//);
-//function OnStatusChange(Bitrix\Main\Event $event)
-//{
-//    $order = $event->getParameter("ENTITY");
-//    $oldValues = $event->getParameter("VALUES");
-//    $arOrderVals = $order->getFields()->getValues();
-//    $directory = '/home/back1c/ftp/statuses/';
-////    $directory = '/srv/sftp/sftp-user/orders/';
-//    if (isset($oldValues['STATUS_ID']) && $arOrderVals['STATUS_ID'] !== $oldValues['STATUS_ID']) {
-//        $filename = $directory . $order->getId() . '.json';
-//        $testData = [
-//            'status' => $arOrderVals['STATUS_ID'],
-//        ];
-//        $jsonString = json_encode($testData, JSON_UNESCAPED_UNICODE);
-//        file_put_contents($filename, $jsonString);
-//    }
-//    $testData = [
-//        'order' => $order,
-//    ];
-//    $jsonString = json_encode($testData, JSON_UNESCAPED_UNICODE);
-//    file_put_contents($directory . '.json', $jsonString);
-//}
 
 // запись заказа на FTP, когда пользователь отменяет заказ
 AddEventHandler('sale', 'OnSaleCancelOrder', 'OnSaleCancelOrderHandler');
 
 function OnSaleCancelOrderHandler($order_id, $status, $info)
 {
-//        $directory = '/srv/sftp/sftp-user/orders/';
+    $order = \Bitrix\Sale\Order::load($order_id);
+    $order->setField("CANCELED","Y");
+    $order->setField('STATUS_ID',"V");
+    $order->save();
     $directory = '/home/back1c/ftp/cancelledByClient/';
     $filename = $directory . $order_id . '.json';
     $testData = [
@@ -193,4 +195,26 @@ function OnSaleCancelOrderHandler($order_id, $status, $info)
     file_put_contents($filename, $jsonString);
 }
 
+AddEventHandler('sale', 'OnBeforeStatusUpdate', 'OnBeforeStatusUpdateHandler');
+
+function OnBeforeStatusUpdateHandler($orderId, &$newStatus, &$oldStatus)
+{
+    if ($newStatus === 'CANCELED') {
+        $order = \Bitrix\Sale\Order::load($orderId);
+        $order->setField("CANCELED", "Y");
+        $order->setField('STATUS_ID', "V");
+        $order->save();
+
+        $directory = '/home/back1c/ftp/cancelledByClient/';
+        $filename = $directory . $orderId . '.json';
+
+        $testData = [
+            'id' => $orderId,
+            'status' => 'canceled_by_client',
+        ];
+
+        $jsonString = json_encode($testData, JSON_UNESCAPED_UNICODE);
+        file_put_contents($filename, $jsonString);
+    }
+}
 

@@ -26,7 +26,6 @@ foreach ($arElHL as $key => $value) {
 }
 
 $rating = round($scoreSum / count($arReview),2);
-// dump($arReview);
 ?>
 <section class="reviews-page">
 	<div class="_container">
@@ -48,7 +47,7 @@ $rating = round($scoreSum / count($arReview),2);
 						</div>
 						<div class="reviews-left__grade-block">
 							<p class="reviews-left__text fz-16px">
-								Общий рейтинг на основе <?=count($arReview)?> отзывов наших покупателей
+								Общий рейтинг на основе <?=($arReview)?count($arReview):0?> отзывов наших покупателей
 							</p>
 							<div class="reviews-left__button-block">
 								<a href="#feedbackAdd" class="button reviews__button">
@@ -70,7 +69,7 @@ $rating = round($scoreSum / count($arReview),2);
 								</div>
 							</div>
 						</label>
-						<p class="rp-left__reviews"><?=count($arScore[5])?> отзывов</p>
+						<p class="rp-left__reviews"><?=($arScore[5])?count($arScore[5]):0?> отзывов</p>
 					</div>
 					<div class="rp-left__srars">
 						<input class="rp-left__input" type="checkbox" id="reviewStars4" value="4">
@@ -84,7 +83,7 @@ $rating = round($scoreSum / count($arReview),2);
 								</div>
 							</div>
 						</label>
-						<p class="rp-left__reviews"><?=count($arScore[4])?> отзывов</p>
+						<p class="rp-left__reviews"><?=($arScore[4])?count($arScore[4]):0?> отзывов</p>
 					</div>
 					<div class="rp-left__srars">
 						<input class="rp-left__input" type="checkbox" id="reviewStars3" value="3">
@@ -98,7 +97,7 @@ $rating = round($scoreSum / count($arReview),2);
 								</div>
 							</div>
 						</label>
-						<p class="rp-left__reviews"><?=count($arScore[3])?> отзывов</p>
+						<p class="rp-left__reviews"><?=($arScore[3])?count($arScore[3]):0?> отзывов</p>
 					</div>
 					<div class="rp-left__srars">
 						<input class="rp-left__input" type="checkbox" id="reviewStars2" value="2">
@@ -112,7 +111,7 @@ $rating = round($scoreSum / count($arReview),2);
 								</div>
 							</div>
 						</label>
-						<p class="rp-left__reviews"><?=count($arScore[2])?> отзывов</p>
+						<p class="rp-left__reviews"><?=($arScore[2])?count($arScore[2]):0?> отзывов</p>
 					</div>
 					<div class="rp-left__srars">
 						<input class="rp-left__input" type="checkbox" id="reviewStars1" value="1">
@@ -126,7 +125,7 @@ $rating = round($scoreSum / count($arReview),2);
 								</div>
 							</div>
 						</label>
-						<p class="rp-left__reviews"><?=count($arScore[1])?> отзывов</p>
+						<p class="rp-left__reviews"><?=($arScore[1])?count($arScore[1]):0?> отзывов</p>
 					</div>
 				</div>
 			</div>

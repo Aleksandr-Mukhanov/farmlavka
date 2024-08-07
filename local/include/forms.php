@@ -189,7 +189,7 @@
           <input class="popup-new__input popup-new__input-email phoneMask" type="tel" id="buyOnePhone" name="phone" placeholder="Телефон" required></input>
         </div>
         <div class="popup-new__bottom-block">
-          <button type='submit' class="popup-request button popup-new__button shadow_green buyOneSend" data-id="">Сделать заказ</button>
+          <button type='submit' class="popup-request button popup-new__button shadow_green buyOneSend" data-id="">Заказать</button>
         </div>
         <div class="popup-new__bottom-block__text">
           <p class="popup-new__bottom-text order__form__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/personal/' class="popup-new__bottom-span">персональных данных</a></u></p>
@@ -307,264 +307,30 @@
       <div class="service-page__section">
         <div class="_container service-page">
           <div class="service-page__grid">
-            <div class="service-page__block">
-              <h3 class="section__title">Интернет-заказ</h3>
-              <ul class="medicine__ul">
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Каталог
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Как сделать заказ
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Блог о здоровье
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Вопросы и ответы
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Корзина
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
+              <? // получим меню
+              $arElHL = getElHL(2,[],[],['*']);
+              foreach ($arElHL as $key => $value)
+                  $arServicePage[$value['UF_SECTION']][] = $value;
 
+              $arSectionSP = getListProperty([],['CODE'=>'UF_SECTION']);
 
-              </ul>
-            </div>
-            <div class="service-page__block">
-              <h3 class="section__title">Покупателям</h3>
-              <ul class="medicine__ul">
-
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Бонусные карты
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Партнеры в Европе
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Подарочные сертификаты
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Заказ редкого лекарства
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Оставить отзыв
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-
-
-              </ul>
-            </div>
-            <div class="service-page__block">
-              <h3 class="section__title">О компании</h3>
-              <ul class="medicine__ul">
-
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Общая информация
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Новости
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Статьи
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Аптека Сервис Плюс
-
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Вакансии
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Журнал
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Контакты
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-
-
-              </ul>
-            </div>
-            <div class="service-page__block">
-              <h3 class="section__title">Аптеки</h3>
-              <ul class="medicine__ul">
-
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Каталог
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Как сделать заказ
-
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Вопросы и ответы
-
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Корзина
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-
-
-              </ul>
-            </div>
-            <div class="service-page__block">
-              <h3 class="section__title">Партнерам</h3>
-              <ul class="medicine__ul">
-
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Арендодателям
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Рекламодателям
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Юридическим лицам
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-
-
-              </ul>
-            </div>
-            <div class="service-page__block">
-              <h3 class="section__title">Проекты и акции</h3>
-              <ul class="medicine__ul">
-
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Проекты
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-                <li class="medicine__li">
-                  <a href="#" class="medicine__link">
-                    <p>
-                      Акции
-                    </p>
-                    <div class="svg categories-block__item-svg medicine__link__svg"></div>
-                  </a>
-                </li>
-
-
-              </ul>
-            </div>
+              foreach ($arServicePage as $key => $servicePage) {?>
+                  <div class="service-page__block">
+                      <h3 class="section__title"><?=$arSectionSP[$key]?></h3>
+                      <ul class="medicine__ul">
+                          <?foreach ($servicePage as $page) {?>
+                              <li class="medicine__li">
+                                  <a href="<?=$page['UF_URL']?>" class="medicine__link">
+                                      <p>
+                                          <?=$page['UF_NAME']?>
+                                      </p>
+                                      <div class="svg categories-block__item-svg medicine__link__svg"></div>
+                                  </a>
+                              </li>
+                          <?}?>
+                      </ul>
+                  </div>
+              <?}?>
           </div>
         </div>
       </div>

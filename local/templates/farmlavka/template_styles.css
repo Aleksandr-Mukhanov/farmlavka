@@ -114,3 +114,42 @@ div.search-popup-row, div.search-popup-row-active{
 .product-page .product-card__b-button{
   display: block;
 }
+
+.checkout__body .mb-4{
+  margin-bottom: 40px;
+}
+.checkout__body .button{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.product-card__price__1{
+  white-space: nowrap;
+}
+
+.text_format h2{
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #000;
+}
+.text_format p{
+  margin-bottom: 10px;
+}
+.text_format ul,
+.text_format ol{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+.text_format ul li,
+.text_format ol li{
+  margin-bottom: 10px;
+  list-style: auto;
+}
+
+.block-faq .page__text b{
+  font-weight: bold;
+  color: black;
+  font-size: 22px;
+}

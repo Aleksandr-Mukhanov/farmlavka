@@ -195,7 +195,7 @@ if($arParams['SWIPER_SLIDE']){?>
 		{
 			$rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
 			foreach ($rowItems as $item) {
-				$generalParams['FAVORITES_ACTIVE'] = (in_array($item['ID'],$arFavorites)) ? 'active' : '';?>
+				$generalParams['FAVORITES_ACTIVE'] = ($arFavorites && in_array($item['ID'],$arFavorites)) ? 'active' : '';?>
 				<?$APPLICATION->IncludeComponent(
 					'bitrix:catalog.item',
 					'',

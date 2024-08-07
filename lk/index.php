@@ -63,13 +63,13 @@ while ($arSalesDB = $rsSales->Fetch()){ // dump($arSalesDB);
   $arDate = explode(' ',$arSalesDB['DATE_INSERT']);
   $arSalesDB['DATE'] = $arDate[0];
   $arSales[] = $arSalesDB;
+  $arOrderIds[] = $arSalesDB['ID'];
 }
 
 $dbBasketItems = CSaleBasket::GetList(
   [],
   [
-    'USER_ID' => $userID,
-    '!ORDER_ID' => NULL
+    'ORDER_ID' => $arOrderIds
   ],
   false,
   false,
@@ -226,6 +226,7 @@ while ($arElement = $rsElements->Fetch()) {
                       <div class="order__right ch-order__right">
                         <p class="product-card__title fz-16px">
                           <a href="<?=$orderItems['DETAIL_PAGE_URL']?>"><?=$orderItems['NAME']?></a>
+                          <span>(<?=round($orderItems['QUANTITY'])?> шт)</span>
                         </p>
                       </div>
                     </div>
@@ -233,12 +234,12 @@ while ($arElement = $rsElements->Fetch()) {
                   <td class="ch-order__td ">
                     <div class="product-card__price ch-order__price pa__order__price">
                       <p class="product-card__price__1 ch-order__card_1 pa__order__card_1 fz-24px">
-                        <?=formatPrice($orderItems['PRICE'])?> ₽
+                        <?=formatPrice($orderItems['QUANTITY'] * $orderItems['PRICE'])?> ₽
                       </p>
                       <?if($orderItems['DISCOUNT_PRICE']>0):?>
                         <div class="ch-order__card_2">
                           <p class="product-card__price__2 ch-order__card_2__text fz-14px">
-                            <?=formatPrice($orderItems['BASE_PRICE'])?> ₽
+                            <?=formatPrice($orderItems['QUANTITY'] * $orderItems['BASE_PRICE'])?> ₽
                           </p>
                         </div>
                       <?endif;?>

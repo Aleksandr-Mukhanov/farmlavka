@@ -32,7 +32,7 @@ if (!empty($arResult['NavQueryString'])) {
 		if ($i == 4) {?>
 			<?break;
 		}?>
-	
+
 		<?php if ($arResult['NavPageNomer'] == $i) : /* если это текущая страница */ ?>
 			<span class="sort__page"><?= $i; ?></span>
 		<?php else : ?>

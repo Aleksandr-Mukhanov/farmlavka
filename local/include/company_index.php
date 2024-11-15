@@ -52,22 +52,19 @@
 	</div>
 	<div class="company__block company__block-5">
 		<div class="company__svg-block block_hide">
-			<div class="svg company__svg">
-			</div>
+			<div class="svg company__svg"></div>
 		</div>
 		<p class="company__text block_hide">
 			 Деятельность нашей компании основана на обеспечении профессиональным кухонным оборудованием заведений общественного питания любого формата: гостиниц, отелей и хостелов, гипермаркетов, столовых, детских садов и школ. От качества оборудования зависит скорость приготовления блюд любой сложности и качество работы ваших поваров. Мы предлагаем вам качественное оборудование для вашего бизнеса: тепловое, холодильное, прачечное, кофейное, барное, для фаст-фуда, нейтральное.
 		</p>
 	</div>
 	<div class="company__block company__block-7">
- <a href="/about/" class="reviews__href">
-		<div class="svg reviews__href__svg">
-		</div>
-		<p class="reviews__href__text">
-			 Показать весь текст
-		</p>
- </a>
+	 <a href="/info/about/" class="reviews__href">
+			<div class="svg reviews__href__svg"></div>
+			<p class="reviews__href__text">
+				 Показать весь текст
+			</p>
+	 </a>
 	</div>
 </div>
-<p style="text-align: justify;">
-</p>
+<p style="text-align: justify;"></p>

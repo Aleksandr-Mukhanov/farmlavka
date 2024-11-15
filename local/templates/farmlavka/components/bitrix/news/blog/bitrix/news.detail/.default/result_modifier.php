@@ -6,7 +6,7 @@ if ($arResult['PROPERTIES']['PROD_1']['VALUE']) $arRelatedItems[] = $arResult['P
 if ($arResult['PROPERTIES']['PROD_2']['VALUE']) $arRelatedItems[] = $arResult['PROPERTIES']['PROD_2']['VALUE'];
 
 if ($arRelatedItems) {
-    $arSelect = Array('CATALOG_QUANTITY','NAME','ID','XML_ID','CATALOG_PRICE_1');
+    $arSelect = Array('CATALOG_QUANTITY','NAME','ID','XML_ID','CATALOG_PRICE_1','DETAIL_PAGE_URL');
     $arFilter = Array("IBLOCK_ID"=>1, "ID"=>$arRelatedItems, "ACTIVE"=>"Y");
     $res = CIBlockElement::GetList(Array(), $arFilter, false, Array(), $arSelect);
     while($ar_fields = $res->GetNext())

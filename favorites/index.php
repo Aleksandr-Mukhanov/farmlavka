@@ -74,9 +74,7 @@ $arrFilter['ID'] = $arFavorites;?>
 					"PAGER_TITLE" => "Товары",
 					"PAGE_ELEMENT_COUNT" => "18",
 					"PARTIAL_PRODUCT_PROPERTIES" => "N",
-					"PRICE_CODE" => array(
-						0 => "BASE",
-					),
+					"PRICE_CODE" => $_SESSION["SOTBIT_REGIONS"]["PRICE_CODE"],
 					"PRICE_VAT_INCLUDE" => "Y",
 					"PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons",
 					"PRODUCT_ID_VARIABLE" => "id",

@@ -25,7 +25,7 @@ foreach ($arResult['SECTIONS'] as $arSection) {
 	<ul class="categories-block__items BShow">
 		<?foreach ($arResult['SECTIONS'] as $section) {?>
 			<li class="categories-block__item" >
-				<a href="<?=$section['SECTION_PAGE_URL']?>" class="categories-block__item-body" >
+				<a href="<?=$section['SECTION_PAGE_URL']?>" class="categories-block__item-body">
 					<p>
 						<?=$section['NAME']?>
 					</p>
@@ -54,5 +54,56 @@ foreach ($arResult['SECTIONS'] as $arSection) {
 			</p>
 			<div class="svg categories-block__item-svg categories-block__item-svg-2"></div>
 		</a>
+	</div>
+</div>
+
+<div id="myModal11" class="modal popup popup__request">
+	<div class="popup-new cities">
+		<div class="cities__body">
+			<div class="popup-new__top ">
+				<p class="popup-new__title">Категории</p>
+				<a data-modal="myModal11" class="close popup__close close-popup close-popup_request popup-new__close">
+					<div class='svg popup-new__close__svg'></div>
+				</a>
+			</div>
+			<div class="categories__categories-block MBShow">
+				<div class="section__block-title">
+					<p class="section__title">Категории</p>
+				</div>
+				<ul class="categories-block__items BShow">
+					<?foreach ($arResult['SECTIONS'] as $section) {?>
+						<li class="categories-block__item" >
+							<a href="<?=$section['SECTION_PAGE_URL']?>" class="categories-block__item-body">
+								<p>
+									<?=$section['NAME']?>
+								</p>
+								<div class="svg categories-block__item-svg"></div>
+								<?if($arResult['SUBMENU'][$section['ID']]):?>
+									<div class="position-items__position-block">
+										<ul class="position-items">
+											<?foreach ($arResult['SUBMENU'][$section['ID']] as $subSection) {?>
+												<li class="position-item__block" >
+													<p class="categories-block__item-body position-item__link" >
+														<?=$subSection['NAME']?>
+													</p>
+												</li>
+											<?}?>
+										</ul>
+									</div>
+								<?endif;?>
+							</a>
+						</li>
+					<?}?>
+				</ul>
+				<div class="categories-block__button">
+					<a class="categories-block__items__button SBtn">
+						<p>
+							показать Все категории
+						</p>
+						<div class="svg categories-block__item-svg categories-block__item-svg-2"></div>
+					</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

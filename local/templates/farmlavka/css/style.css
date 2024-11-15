@@ -1840,7 +1840,7 @@ body.lock {
   grid-column-gap: 30px !important;
 }
 .popup-new__form.leave-feedback__form{
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr;
   grid-template-areas: "n n e  e" "t t t t" "b bt bt bt";
   grid-gap: 20px;
 }
@@ -1955,7 +1955,7 @@ input::placeholder {
     grid-gap: 20px;
   }
   .popup-new__form.leave-feedback__form{
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 3fr 1fr 1fr;
     grid-template-areas: "n n" "e e" "t t" "bt bt" "b b";
   }
 
@@ -2026,8 +2026,18 @@ input::placeholder {
   grid-template-columns: 1fr 1fr 1fr;
   -ms-grid-rows: 1fr 20px 1fr 20px 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-      grid-template-areas: "n n n" "e e e" "b bt bt";
+  grid-template-areas: "n n n" "e e e" "b bt bt";
   grid-gap: 20px;
+}
+
+#form-restore .personal-area__form{
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "n n n" "b bt bt";
+}
+
+#form-reg .popup-new__text,
+#form-restore .popup-new__text{
+  margin-bottom: 15px;
 }
 
 .personal-area__input-b {
@@ -4446,6 +4456,9 @@ ul.company__text li::after {
     -ms-grid-column-span: 5;
     grid-area: d;
     display: none;
+  }
+  .company-page .company__block-4{
+    display: block;
   }
   .product-filter__blocks > .company__block-4 {
     -ms-grid-row: 1;
@@ -7595,7 +7608,7 @@ section.range-slider input[type=range]::-moz-focus-outer {
   width: 280px;
   position: relative;
 }
-.note-card:first-child:before, .note-card:nth-child(2):before {
+/* .note-card:first-child:before, .note-card:nth-child(2):before {
   position: absolute;
   content: "+";
   color: #2fd3ae;
@@ -7628,7 +7641,7 @@ section.range-slider input[type=range]::-moz-focus-outer {
 .note-card:nth-child(2):before {
   position: absolute;
   content: "=";
-}
+} */
 
 .after-none::after {
   content: none;
@@ -9357,7 +9370,7 @@ section.range-slider input[type=range]::-moz-focus-outer {
   border-radius: 50px;
 }
 
-.articles__a-content-main {
+/* .articles__a-content-main {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 485px 30px 1fr;
@@ -9375,7 +9388,7 @@ section.range-slider input[type=range]::-moz-focus-outer {
 .articles__a-content-main > *:nth-child(2) {
   -ms-grid-row: 1;
   -ms-grid-column: 3;
-}
+} */
 
 .c-main__title__text {
   padding: 10px;

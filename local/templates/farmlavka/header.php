@@ -50,11 +50,11 @@ use Bitrix\Main\Page\Asset,
   }
 
   // получим теги
-  $rsPropertyEnum = CIBlockPropertyEnum::GetList(
-    ["SORT"=>"ASC"],["IBLOCK_ID"=>1, "CODE"=>"TAGS"]
-  );
-  while($arPropertyEnum = $rsPropertyEnum->Fetch())
-    $arTag[$arPropertyEnum['ID']] = $arPropertyEnum['VALUE'];
+  // $rsPropertyEnum = CIBlockPropertyEnum::GetList(
+  //   ["SORT"=>"ASC"],["IBLOCK_ID"=>1, "CODE"=>"TAGS"]
+  // );
+  // while($arPropertyEnum = $rsPropertyEnum->Fetch())
+  //   $arTag[$arPropertyEnum['ID']] = $arPropertyEnum['VALUE'];
 ?>
 <!DOCTYPE html>
 <html lang="<?=LANGUAGE_ID?>">
@@ -86,14 +86,11 @@ use Bitrix\Main\Page\Asset,
         <div class="_container header_container">
           <div class="header__top__flex">
             <div class="header__top__flex__block">
-              <?$APPLICATION->IncludeComponent(
-                "sotbit:regions.choose",
-                "farmlavka",
-                Array(
-              	   "FROM_LOCATION" => "Y",	// Данные берутся из местоположений
-              	),
-              	false
-              );?>
+              <a class="popup-request header__top__block myBtn" data-modal="myModal7" id="regions_choose_component">
+                <div class="header__city__svg header__city__svg__1"></div>
+                <span class="header__city__text" data-entity="select-city__block__text-city"></span>
+                <div class="header__city__sign"></div>
+              </a>
               <a class="header__top__block header__top__block_2 hbb-active " data-hover-2='2'>
                 <div class="header__city__svg header__city__svg__2"></div>
                 <span class="header__city__text">Служебные страницы</span>
@@ -229,6 +226,7 @@ use Bitrix\Main\Page\Asset,
       	false
       );?>
 
+      <?/*?>
       <div class="header__bottom">
         <div class="_container">
           <div class="header__bottom-items">
@@ -265,7 +263,8 @@ use Bitrix\Main\Page\Asset,
           </div>
         </div>
       </div>
-
+      <?*/?>
+      <input type="hidden" value="<?=$basketCNT?>" id="basketCNT">
     </header>
 
     <header class="header header_mobile ">
@@ -299,7 +298,9 @@ use Bitrix\Main\Page\Asset,
               "PATH" => "/local/include/header_logo.php"
             )
           );?>
-          <a href="/basket/" class="svg header__tell-svg header__basket"></a>
+          <a href="/basket/" class="svg header__tell-svg header__basket">
+            <span><?=$basketCNT?></span>
+          </a>
         </div>
       </div>
       <div class="header__contacts__block">
@@ -345,6 +346,7 @@ use Bitrix\Main\Page\Asset,
           </div>
         </div>
       </div>
+      <?/*?>
       <div class="header__bottom header__bottom__condition">
         <div class="_container">
           <div class="header__bottom-items">
@@ -381,10 +383,17 @@ use Bitrix\Main\Page\Asset,
           </div>
         </div>
       </div>
+      <?*/?>
       <div class="header-mobile__menu">
         <div class="header-mobile__search">
           <div class="header__search-button header__search-1024px">
-            <input class="header__search-1024px__input" />
+            <?$APPLICATION->IncludeComponent("bitrix:search.form", "header", Array(
+            	 "PAGE" => "#SITE_DIR#search/index.php",	// Страница выдачи результатов поиска (доступен макрос #SITE_DIR#)
+            	 "USE_SUGGEST" => "Y",	// Показывать подсказку с поисковыми фразами
+            	),
+            	false
+            );?>
+            <!-- <input class="header__search-1024px__input" /> -->
           </div>
         </div>
         <div class="header__catalogs">

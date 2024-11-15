@@ -153,3 +153,14 @@ div.search-popup-row, div.search-popup-row-active{
   color: black;
   font-size: 22px;
 }
+
+.company__body h3{
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.header-mobile__menu .header-mobile__search .header__search__input__block .header__search__input{
+  width: 100%;
+  padding: 0 35px;
+}

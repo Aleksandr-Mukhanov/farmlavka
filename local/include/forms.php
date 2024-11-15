@@ -20,7 +20,7 @@
           <button type='submit' class="popup-request button call-back__button shadow_green">Отправить</button>
         </div>
         <div class="popup-new__bottom-block__text">
-          <p class="popup-new__bottom-text call-back__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/personal/' class="popup-new__bottom-span">персональных данных</a></u></p>
+          <p class="popup-new__bottom-text call-back__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
         </div>
 
       </div>
@@ -52,7 +52,7 @@
           <button type='submit' class="popup-request button popup-new__button shadow_green">Напишите мне</button>
         </div>
         <div class="popup-new__bottom-block__text">
-          <p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/personal/' class="popup-new__bottom-span">персональных данных</a></u></p>
+          <p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
         </div>
 
       </div>
@@ -60,13 +60,15 @@
   </div>
 </form>
 
-<form action="" method="post" id="myModal2" class="modal popup popup__request formAuth">
-  <div class="popup-new ">
-    <div class="popup-new__body">
-      <div class="popup-new__top ">
+<div id="myModal2" class="modal popup popup__request">
+  <div class="popup-new">
+
+    <div class="popup-new__body" id="form-auth">
+      <div class="popup-new__top">
         <div class="personal-area">
           <p class="popup-new__title">Войти</p>
-          <a href="#" class="personal-area__suptitle myBtn" data-modal="myModal3">Регистрация</a>
+          <a class="personal-area__suptitle btnAuth" data-div="form-reg">Регистрация</a>
+          <a class="personal-area__suptitle btnAuth" data-div="form-restore">Восстановить пароль</a>
         </div>
         <a href="#" id="" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
           <div class='svg popup-new__close__svg'></div>
@@ -74,7 +76,7 @@
       </div>
       <p class="popup-new__text">Оставьте ваши данные и мы свяжемся с вами. Мы не занимаемся рассылкой рекламных сообщений, а так же не передаем контактные данные третьим лицам
       </p>
-      <div class="popup-new__form personal-area__form">
+      <form action="" method="post" class="popup-new__form personal-area__form formAuth">
         <div class="popup-new__block-name personal-area__input-b">
           <input class="popup-new__input popup-new__input-name phoneMask" type="tel" name="phone" placeholder="Ваш телефон" required></input>
         </div>
@@ -85,28 +87,25 @@
           <button type='submit' class="popup-request button popup-new__button shadow_green">Войти</button>
         </div>
         <div class="popup-new__bottom-block__text">
-          <p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/personal/' class="popup-new__bottom-span">персональных данных</a></u></p>
+          <p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
         </div>
-      </div>
+      </form>
     </div>
-  </div>
-</form>
 
-<form action="" method="post" id="myModal3" class="modal popup popup__request formReg">
-  <div class="popup-new ">
-    <div class="popup-new__body">
-      <div class="popup-new__top ">
+    <div class="popup-new__body hide" id="form-reg">
+      <div class="popup-new__top">
         <div class="personal-area">
+          <a class="personal-area__suptitle btnAuth" data-div="form-auth">Войти</a>
           <p class="popup-new__title">Регистрация</p>
-          <a class="personal-area__suptitle myBtn" data-modal="myModal2">Войти</a>
+          <a class="personal-area__suptitle btnAuth" data-div="form-restore">Восстановить пароль</a>
         </div>
-        <a href="#" data-modal="myModal3" class="close popup__close close-popup close-popup_request popup-new__close">
+        <a href="#" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
           <div class='svg popup-new__close__svg'></div>
         </a>
       </div>
       <p class="popup-new__text">Оставьте ваши данные и мы свяжемся с вами. Мы не занимаемся рассылкой рекламных сообщений, а так же не передаем контактные данные третьим лицам
       </p>
-      <div class="popup-new__form registration__form">
+      <form action="" method="post" class="popup-new__form registration__form formReg">
         <div class="popup-new__block-name personal-area__input-b">
           <input class="popup-new__input popup-new__input-name phoneMask" type="tel" name="phone" placeholder="Ваш телефон" required></input>
         </div>
@@ -120,12 +119,73 @@
           <button type='submit' class="popup-request button popup-new__button shadow_green">регистрация</button>
         </div>
         <div class="popup-new__bottom-block__text">
-          <p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/personal/' class="popup-new__bottom-span">персональных данных</a></u></p>
+          <p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
         </div>
+      </form>
+    </div>
+
+    <div class="popup-new__body hide" id="form-restore">
+      <div class="popup-new__top">
+        <div class="personal-area">
+          <a class="personal-area__suptitle btnAuth" data-div="form-auth">Войти</a>
+          <a class="personal-area__suptitle btnAuth" data-div="form-reg">Регистрация</a>
+          <p class="popup-new__title">Восстановить пароль</p>
+        </div>
+        <a href="#" id="" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
+          <div class='svg popup-new__close__svg'></div>
+        </a>
       </div>
+      <p class="popup-new__text">Введите номер телефона для восстановления доступа</p>
+      <form action="" method="post" class="popup-new__form personal-area__form formRestore">
+        <div class="popup-new__block-name personal-area__input-b">
+          <input class="popup-new__input popup-new__input-name phoneMask" type="tel" name="phone" placeholder="Ваш телефон" required></input>
+        </div>
+        <div class="popup-new__bottom-block">
+          <button type='submit' class="popup-request button popup-new__button shadow_green">Восстановить</button>
+        </div>
+        <div class="popup-new__bottom-block__text">
+          <p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<div id="myModal3" class="modal popup popup__request">
+  <div class="popup-new">
+    <div class="popup-new__body">
+      <div class="popup-new__top">
+        <div class="personal-area">
+          <p class="popup-new__title">Регистрация</p>
+          <a class="personal-area__suptitle myBtn" data-modal="myModal2">Войти</a>
+        </div>
+        <a href="#" data-modal="myModal3" class="close popup__close close-popup close-popup_request popup-new__close">
+          <div class='svg popup-new__close__svg'></div>
+        </a>
+      </div>
+      <p class="popup-new__text">Оставьте ваши данные и мы свяжемся с вами. Мы не занимаемся рассылкой рекламных сообщений, а так же не передаем контактные данные третьим лицам
+      </p>
+      <form action="" method="post" class="popup-new__form registration__form formReg">
+        <div class="popup-new__block-name personal-area__input-b">
+          <input class="popup-new__input popup-new__input-name phoneMask" type="tel" name="phone" placeholder="Ваш телефон" required></input>
+        </div>
+        <div class="popup-new__block-email personal-area__input-b">
+          <input class="popup-new__input popup-new__input-email" type="text" name='password' placeholder="Пароль" required></input>
+        </div>
+        <div class="popup-new__block-email  personal-area__input-b registration__input-b_1">
+          <input class="popup-new__input popup-new__input-email" type="text" name="password_confirm" placeholder="Пароль ещё раз" required></input>
+        </div>
+        <div class="popup-new__bottom-block">
+          <button type='submit' class="popup-request button popup-new__button shadow_green">регистрация</button>
+        </div>
+        <div class="popup-new__bottom-block__text">
+          <p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
+        </div>
+      </form>
     </div>
   </div>
-</form>
+</div>
 
 <form action="https://echo.htmlacademy.ru" method="post" id="myModal4" class="modal popup popup__request ">
   <div class="popup-new order__popup">
@@ -192,7 +252,7 @@
           <button type='submit' class="popup-request button popup-new__button shadow_green buyOneSend" data-id="">Заказать</button>
         </div>
         <div class="popup-new__bottom-block__text">
-          <p class="popup-new__bottom-text order__form__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/personal/' class="popup-new__bottom-span">персональных данных</a></u></p>
+          <p class="popup-new__bottom-text order__form__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
         </div>
 
       </div>
@@ -237,7 +297,7 @@
   </div>
 </form>
 
-<form action="" method="post" id="myModal6" class="modal popup popup__request sendForm" data-title="Мы вам перезвоним">
+<div id="myModal6" class="modal popup popup__request">
   <div class="popup-new call-back">
     <div class="popup-new__body">
       <div class="popup-new__top ">
@@ -247,24 +307,23 @@
         </a>
       </div>
       <p class="popup-new__text">Оставьте ваши данные и мы свяжемся с вами. Мы не занимаемся рассылкой рекламных сообщений, а так же не передаем контактные данные третьим лицам </p>
-      <div class="popup-new__form call-back__form">
+      <form action="" method="post"  class="popup-new__form call-back__form sendForm" data-title="Мы вам перезвоним">
         <div class="popup-new__block-name">
           <input class="popup-new__input popup-new__input-name" name="name" type="text" placeholder="Ваше имя" required>
         </div>
         <div class="popup-new__block-email">
-          <input class="popup-new__input popup-new__input-email" name="phone" type="tel" placeholder="Телефон" required>
+          <input class="popup-new__input popup-new__input-email phoneMask" type="tel" name="phone" placeholder="Телефон" required>
         </div>
         <div class="popup-new__bottom-block">
           <button type='submit' class="popup-request button call-back__button shadow_green">Перезвоните мне</button>
         </div>
         <div class="popup-new__bottom-block__text">
-          <p class="popup-new__bottom-text call-back__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/personal/' class="popup-new__bottom-span">персональных данных</a></u></p>
+          <p class="popup-new__bottom-text call-back__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
         </div>
-
-      </div>
+      </form>
     </div>
   </div>
-</form>
+</div>
 
 <form action="https://echo.htmlacademy.ru" method="post" id="myModal8" class="modal popup popup__request ">
   <div class="popup-new call-back">
@@ -287,7 +346,7 @@
           <button type='submit' class="popup-request button call-back__button shadow_green">Перезвоните мне</button>
         </div>
         <div class="popup-new__bottom-block__text">
-          <p class="popup-new__bottom-text call-back__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/personal/' class="popup-new__bottom-span">персональных данных</a></u></p>
+          <p class="popup-new__bottom-text call-back__text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href='/info/privacy/' class="popup-new__bottom-span">персональных данных</a></u></p>
         </div>
 
       </div>

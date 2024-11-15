@@ -12,7 +12,7 @@
             <input class="footer__question__input footer__question__number phoneMask" id="number" placeholder="+7 (___) ___-__-__" name="phone" type="tel" required/>
             <p class="footer__question__text">
               Нажимая на кнопку, вы соглашаетесь на обработку
-              <a href="/personal/" class="footer__question__span">персональных данных</a>
+              <a href="/info/privacy/" class="footer__question__span">персональных данных</a>
             </p>
             <!-- <a class="button footer__button myBtn" data-modal="myModal5">Задать вопрос</a> -->
             <button class="button footer__button myBtn" type="submit">Задать вопрос</button>
@@ -116,6 +116,14 @@
     "EDIT_TEMPLATE" => "",
     "PATH" => "/local/include/forms.php"
   )
+);?>
+<?$APPLICATION->IncludeComponent(
+  "sotbit:regions.choose",
+  "farmlavka",
+  Array(
+     "FROM_LOCATION" => "Y",	// Данные берутся из местоположений
+  ),
+  false
 );?>
 
 </body>

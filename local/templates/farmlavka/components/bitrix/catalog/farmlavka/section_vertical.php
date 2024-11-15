@@ -30,12 +30,12 @@ else
 				<p>показать Все категории</p>
 			</div>
 		</a>
-		<a data-modal="myModal10" class="myBtn cb-button categories__left__b-button-bottom" >
+		<!-- <a data-modal="myModal10" class="myBtn cb-button categories__left__b-button-bottom" >
 			<div class="header__contacts__block__text__active cb-button-bottom">
 				<div class="svg header__contacts__block__svg"></div>
 				<p>показать фильтр</p>
 			</div>
-		</a>
+		</a> -->
 		<?$sectionListParams = array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -182,6 +182,7 @@ else
 		),
 		false
 	);?>
+	<?/*?>
 	<div class="categories__right__brands">
 		<h2 class="section__title">
 			Популярные бренды
@@ -195,8 +196,18 @@ else
 						<?=mb_strimwidth($brand['UF_NAME'], 0, 15, '...');?>
 					</a>
 				</li>
-			<?}
-			if(isset($_REQUEST['sort'])){ // если есть сортировка
+			<?}?>
+		</ul>
+	</div>
+	<?*/?>
+	<div class="categories__sort" >
+		<div class="sort__left" >
+			<div class="sort__left__body" >
+				<p class="section__title" >
+					Сортировать:
+				</p>
+			</div>
+			<?if(isset($_REQUEST['sort'])){ // если есть сортировка
 					switch($_REQUEST['sort']){
 						case 'price':
 							$sortBy = 'CATALOG_PRICE_1';
@@ -216,16 +227,6 @@ else
 					$sortOrder = $arParams["ELEMENT_SORT_ORDER"];
 				}
 			?>
-		</ul>
-	</div>
-	<div class="categories__sort" >
-		<div class="sort__left" >
-			<div class="sort__left__body" >
-				<p class="section__title" >
-					Сортировать:
-				</p>
-			</div>
-
 			<?if($_REQUEST['sort'] == 'price'):?>
 				<a href="?sort=price" class="sort__price sort__hover" >
 					<div class="sort__price__svg-block" >

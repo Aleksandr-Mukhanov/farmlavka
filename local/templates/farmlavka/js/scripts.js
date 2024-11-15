@@ -67,13 +67,20 @@ $(document).ready(function(){
         type: 'post',
         data: { action: 'sendPromo', promo: promo },
         success: function (result) {
-          console.log(result);
+          // console.log(result);
           arResult = JSON.parse(result);
           if (arResult.result == 'no') alert('Промокод не найден!');
           else location.href = '/basket/';
         }
     });
 	});
+
+  // переключение в модалке авторизации
+  $(".btnAuth").click(function() {
+    $(this).parents('.popup-new__body').slideUp();
+    div = $(this).attr('data-div');
+    $('#'+div).slideDown();
+  });
 
   // авторизация
   $(".formAuth").submit(function() {
@@ -116,6 +123,25 @@ $(document).ready(function(){
     });
 	});
 
+  // восстановить пароль
+  $(".formRestore").submit(function() {
+    event.preventDefault();
+		var form = $(this);
+    login = form.find('input[name="phone"]').val();
+
+    $.ajax({
+        url: '/local/ajax/sendForm.php',
+        type: 'post',
+        data: { action: 'sendRestore', login: login },
+        success: function (result) {
+          // console.log(result);
+          resultAuth = JSON.parse(result);
+          if (resultAuth.TYPE == 'ERROR') alert(resultAuth.MESSAGE);
+          else location.reload();
+        }
+    });
+	});
+
   // количество
   $('.counter__minus').click(function(){
     counter__numer = $(this).parent().find('.counter__numer');
@@ -132,10 +158,10 @@ $(document).ready(function(){
 
   // в корзину
   $('.cartAdd').click(function(){
-    header__basket = $('.header__basket span');
-    qnt = header__basket.text();
+    qnt = parseInt($('#basketCNT').val());
     qnt++;
-    header__basket.text(qnt);
+    $('#basketCNT').val(qnt);
+    $('.header__basket span').text(qnt);
 
     productID = $(this).attr('data-id');
     quantity = $(this).parent().find('.counter__numer').text();
@@ -238,6 +264,9 @@ $(document).ready(function(){
         success: function (result) {
           // console.log(result);
           form.html(result);
+          setTimeout(() => {
+            form.parent().find('.popup__close').trigger('click');
+          }, 3000)
         }
     });
 	});
@@ -393,7 +422,7 @@ $(document).ready(function(){
   });
 
   // показ меню
-  $('.header__catalog').click(function(){
+  $('.menu_open').click(function(){
     event.preventDefault();
 
     submenu = $(this).attr('data-submenu');
@@ -406,7 +435,7 @@ $(document).ready(function(){
     }
     else
     {
-      $('.header__catalog').removeClass('hover');
+      $('.menu_open').removeClass('hover');
       $(this).toggleClass('hover');
       $('.medicine__section').addClass('hover');
     }

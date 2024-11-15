@@ -234,7 +234,7 @@ $rating = round($scoreSum / count($arReview),2);
 								<input class="popup-new__input popup-new__input-email" type="email" name="email" placeholder="Ваш e-mail" value="<?=$USER->GetEmail()?>" required>
 							</div>
 							<div class="popup-new__block-text leave-feedback__problem">
-								<input class="popup-new__input popup-new__input-text " type="text" name="text" placeholder="Напишите подробный отзыв, это важно ...">
+								<textarea class="popup-new__input popup-new__input-text" name="text" placeholder="Напишите подробный отзыв, это важно ..." rows="7"></textarea>
 							</div>
 							<div class="popup-new__bottom-block leave-feedback__bottom-block">
 								<input type="hidden" name="score" value="4">
@@ -242,7 +242,7 @@ $rating = round($scoreSum / count($arReview),2);
 								<button type="submit" class="popup-request button popup-new__button">отправить</button>
 							</div>
 							<div class="popup-new__bottom-block__text leave-feedback__text">
-								<p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href="#" class="popup-new__bottom-span">персональных данных</a></u></p>
+								<p class="popup-new__bottom-text">Нажимая на кнопку, вы соглашаетесь на обработку <u><a href="/info/privacy/" class="popup-new__bottom-span">персональных данных</a></u></p>
 							</div>
 						</form>
 					</div>

@@ -15,7 +15,7 @@ if ($action == 'sendForm'){ // отправка заявки
     "IP" => $_SERVER['REMOTE_ADDR']
   );
   $event = ($mailFields['TOPIC']) ? 'SEND_FORM_FULL' : 'SEND_FORM';
-  if (CEvent::Send($event, "s1", $mailFields)) echo '<p>Спасибо! Данные успешно отправлены!</p>';
+  if (CEvent::Send($event, "s1", $mailFields)) echo '<p>Спасибо! Ваше сообщение отправлено!</p>';
   else echo '<p>Ошибка! Данные не отправлены!</p>';
 }
 elseif ($action == 'buyOne') // купить в 1 клик
@@ -31,7 +31,7 @@ elseif ($action == 'buyOne') // купить в 1 клик
         "IP" => $_SERVER['REMOTE_ADDR']
     );
     $event = 'SEND_BUY_ONE';
-    if (CEvent::Send($event, "s1", $mailFields)) echo '<p>Спасибо! Данные успешно отправлены!</p>';
+    if (CEvent::Send($event, "s1", $mailFields)) echo '<p>Спасибо! Ваше сообщение отправлено!</p>';
     else echo '<p>Ошибка! Данные не отправлены!</p>';
 }
 elseif ($action == 'sendAuth') // авторизация
@@ -52,6 +52,14 @@ elseif ($action == 'sendReg') // регистрация
 
   global $USER;
   $arResult = $USER->Register($login, "", "", $password, $passwordConfirm, "");
+  echo json_encode($arResult);
+}
+elseif ($action == 'sendRestore') // восстановить пароль
+{
+  $login = $request->getPost('login');
+
+  global $USER;
+  $arResult = $USER->SendPassword($USER->GetLogin(), $USER->GetParam("EMAIL"));
   echo json_encode($arResult);
 }
 elseif ($action == 'sendReview') // отзыв

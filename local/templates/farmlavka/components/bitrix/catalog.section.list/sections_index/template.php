@@ -28,7 +28,12 @@ $i=0;
 					<p class="product-filter__block__body__title"><?=$section['NAME']?></p>
 				</div>
 				<ul class="product-filter__ul">
-					<?foreach ($arResult['SUBMENU'][$section['ID']] as $subSection) {?>
+					<?
+						$j=0;
+						foreach ($arResult['SUBMENU'][$section['ID']] as $subSection) {
+							$j++;
+							if ($j>5) continue;
+					?>
 						<li class="product-filter__li">
 							<a href="<?=$subSection['SECTION_PAGE_URL']?>" class="product-filter__link"><?=$subSection['NAME']?></a>
 						</li>

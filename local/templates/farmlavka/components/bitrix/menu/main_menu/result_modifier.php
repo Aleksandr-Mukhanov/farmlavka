@@ -10,6 +10,6 @@ while ($arSection = $rsSections->GetNext()) {
   else $arResult['MENU'][] = $arSection;
 }
 
-$arResult['DISEASE'] = getElHL(4,[],[],['*']);
+// $arResult['DISEASE'] = getElHL(4,[],[],['*']);
 
 // dump($arResult['HIT']);

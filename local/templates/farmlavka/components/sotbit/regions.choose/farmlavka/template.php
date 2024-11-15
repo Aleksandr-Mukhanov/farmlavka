@@ -7,12 +7,6 @@ $this->setFrameMode(true);
 $frame = $this->createFrame()->begin("");
 ?>
 
-<a class="popup-request header__top__block myBtn" data-modal="myModal7" id="regions_choose_component">
-  <div class="header__city__svg header__city__svg__1"></div>
-  <span class="header__city__text" data-entity="select-city__block__text-city"></span>
-  <div class="header__city__sign"></div>
-</a>
-
 <div class="select-city__dropdown-wrap" id="regions_choose_component_dropdown" style="display: none;">
     <div class="select-city__dropdown">
         <div class="select-city__dropdown__title-wrap">

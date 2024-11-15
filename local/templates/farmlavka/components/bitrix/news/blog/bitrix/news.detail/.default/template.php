@@ -134,7 +134,7 @@
 					Обратите внимание
 				</h2>
 				<div class="note__body">
-					<a href="#" class="product-card note-card">
+					<a href="<?=$arResult['RELATED_PROD'][0]['DETAIL_PAGE_URL']?>" class="product-card note-card">
 						<div class="product-card__block__img">
 							<div class="product-card__img after-none ">
 								<?
@@ -162,7 +162,7 @@
 							</p>
 						</div>
 					</a>
-					<a href="#" class=" product-card note-card">
+					<a href="<?=$arResult['RELATED_PROD'][1]['DETAIL_PAGE_URL']?>" class=" product-card note-card">
 						<div class="product-card__block__img">
 							<div class="product-card__img after-none">
 								<img src="<?=$arFile2['SRC']?>" alt="таблетка">
@@ -186,6 +186,7 @@
 							</p>
 						</div>
 					</a>
+					<?/*?>
 					<div class="note__last">
 						<div class="note__n-last-body">
 							<p class="n-last-body__text">
@@ -209,6 +210,7 @@
 							</div>
 						</div>
 					</div>
+					<?*/?>
 				</div>
 			</section>
     <?endif;?>

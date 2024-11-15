@@ -4,7 +4,7 @@
 		<ul class="header__catalogs__body">
 			<?foreach ($arResult['MENU'] as $item) {?>
 				<li>
-					<a href="<?=$item['SECTION_PAGE_URL']?>" class="header__catalog" data-submenu="<?=$item['ID']?>">
+					<a href="<?=$item['SECTION_PAGE_URL']?>" class="header__catalog menu_open" data-submenu="<?=$item['ID']?>">
 						<div class="svg header__catalog__svg header__catalog__svg-<?=$item['ID']?>"></div>
 						<div class="header__catalog__text"><?=$item['NAME']?></div>
 					</a>
@@ -39,6 +39,7 @@
 				<p class="reviews__href__text">Все категории</p>
 			</a>
 		</div>
+		<?/*?>
 		<div class="medicine__block">
 			<h3 class="section__title">Заболевания</h3>
 			<div class="medicine__grid">
@@ -61,6 +62,7 @@
 				<p class="reviews__href__text">ещё</p>
 			</a>
 		</div>
+		<?*/?>
 		<div class="medicine__block">
 			<h3 class="section__title">хиты продаж</h3>
 			<?$APPLICATION->IncludeComponent(

@@ -13,6 +13,7 @@ class farmlavka extends CBitrixComponent
 {
     function order()
     {
+
         $userID = Sale\Fuser::getId();
         $siteID = Bitrix\Main\Context::getCurrent()->getSite();
         $currencyCode = CurrencyManager::getBaseCurrency();
@@ -76,15 +77,36 @@ class farmlavka extends CBitrixComponent
             'filter' => ['ID'=>$_SESSION["SOTBIT_REGIONS"]['STORE'],'ACTIVE'=>'Y'],
             'select' => ['ID','TITLE','ADDRESS','GPS_N','GPS_S','PHONE','SCHEDULE','UF_CARD','UF_AVAILABLE']
         ]);
-        $storeIdToFTP = '';
+
+
+        // Функция для очистки адреса
+        function cleanAddress($address) {
+            // Убираем ненужные слова (ул., д., г.)
+            $patterns = ['/г\.?\s*/', '/ул\.?\s*/', '/д\.?\s*/', '/,\s*/'];
+            $address = preg_replace($patterns, '', $address);
+
+            // Приводим строку к нижнему регистру и убираем лишние пробелы
+            $address = mb_strtolower(trim($address));
+
+            return $address;
+        }
+
+        $addressFromFront = cleanAddress($_REQUEST['STORE']);
+        $actualStoreId = '';
+
 
         while($arStore = $rsStore->fetch())
         {
             $arStore['COORDINATES'] = $arStore['GPS_N'].','.$arStore['GPS_S'];
-            $storeIdToFTP = $arStore['ID'];
+
+            // Очищаем адрес склада для сравнения
+            $cleanStoreAddress = cleanAddress($arStore['ADDRESS']);
+            if (strpos($cleanStoreAddress, $addressFromFront) !== false) {
+                $actualStoreId = $arStore['ID'];
+            }
+
             foreach ($arStore['UF_CARD'] as $value)
                 $arStore['UF_CARD_NAME'][] = $arCard[$value];
-
             $arStores[$arStore['ID']] = $arStore;
         }
 
@@ -117,6 +139,7 @@ class farmlavka extends CBitrixComponent
         // dump($_REQUEST);
         if($_REQUEST['SEND_ORDER'] == 'Оформить заказ')
         {
+            error_log("Начат процесс создания заказа...", 3, "/var/log/order_cancel.log");
             $orderFIO = $_REQUEST['orderFIO'];
             $orderMail = $_REQUEST['orderMail'];
             $orderPhone = $_REQUEST['orderPhone'];
@@ -165,9 +188,9 @@ class farmlavka extends CBitrixComponent
             $order->setBasket($basket);
 
 
-            $order->setField('USER_DESCRIPTION', $storeIdToFTP . '');
+            $order->setField('USER_DESCRIPTION', $actualStoreId . '');
             if ($_REQUEST['STORE'])
-                $order->setField('USER_DESCRIPTION', $storeIdToFTP . '');
+                $order->setField('USER_DESCRIPTION', $actualStoreId . '');
 
 //            $order->setField('USER_DESCRIPTION', 'Склад: '.$_REQUEST['STORE']);
 
@@ -226,6 +249,7 @@ class farmlavka extends CBitrixComponent
                 $arResult['RESULT'] = 'Ошибка создания заказа: '.$result->getErrors();
             }else{
                 $arResult['RESULT'] = 'Заказ №'.$order->getId().' создан успешно.';
+//                $arResult['RESULT'] = 'Магазин id: '.$actualStoreId.'.';
 
                 // для оплаты
                 $paySystemBufferedOutput = $paySystemService->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);

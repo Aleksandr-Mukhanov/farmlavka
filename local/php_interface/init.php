@@ -61,6 +61,7 @@ function getElHL($idHL, $order, $filter, $select)
 use Bitrix\Main;
 use Bitrix\Catalog\StoreTable;
 use Bitrix\Catalog\StoreProductTable;
+use Bitrix\Iblock\ElementTable;
 
 Main\EventManager::getInstance()->addEventHandler(
     'sale',
@@ -69,14 +70,16 @@ Main\EventManager::getInstance()->addEventHandler(
 );
 
 
+/**
+ * @throws Exception
+ */
 function sendingAnOrderToSFTP(Main\Event $event)
 {
     /** @var Order $order */
     $order = $event->getParameter("ENTITY");
     $isNew = $event->getParameter("IS_NEW");
     $directory = '/home/back1c/ftp/orders/';
-    //$directory = '/home/back1c/ftp/newOrders/';
-//    $directory = '/home/back1c/ftp/cancelledByClient/';
+//    $directory = '/home/back1c/ftp/nomenclature/';
     $uid = $order->getUserId();
     $User = CUser::GetByID($uid);
 
@@ -101,15 +104,32 @@ function sendingAnOrderToSFTP(Main\Event $event)
             }
         }
 
+        $dateInsertString = $order->getDateInsert()->toString(); // String
+        $dateInsert = new DateTime($dateInsertString);
+        $formattedDate = $dateInsert->format('Y-m-d\TH:i:s');
+
+        $gender = '0'; // По умолчанию - неопределено
+
+        if (isset($userProp['PERSONAL_GENDER'])) {
+            switch ($userProp['PERSONAL_GENDER']) {
+                case 'M':
+                    $gender = '1'; // Мужской
+                    break;
+                case 'F':
+                    $gender = '2'; // Женский
+                    break;
+            }
+        }
+        $phoneWhithoutMask = (string) preg_replace('/\D/', '', $phone); // Убираем все символы, кроме цифр
         $orderData = [
             'id' => $orderId,
-            'date' => $order->getDateInsert()->toString(),
+            'date' => $formattedDate,
             'sum' => $order->getPrice(),
             'ClientFIO' => $fio,
             'Mail' => $email,
-            'ClientPhoneNumber' => $phone,
+            'ClientPhoneNumber' => $phoneWhithoutMask,
             'idstore' => $order->getField('USER_DESCRIPTION'),
-//            'Gender' => $userProp['PERSONAL_GENDER'],
+            'Gender' => $gender
         ];
 
         // Получение списка товаров заказа
@@ -128,6 +148,14 @@ function sendingAnOrderToSFTP(Main\Event $event)
                 'filter' => ['ID' => $storeId],
             ])->fetch();
             $moving = 0;
+
+            // Получаем внешний код (XML_ID) товара
+            $productData = ElementTable::getList([
+                'filter' => ['ID' => $productId],
+                'select' => ['XML_ID']
+            ])->fetch();
+
+            $externalId = isset($productData['XML_ID']) ? $productData['XML_ID'] : '';
 
             if ($storeData) {
                 // Преобразуем строковый идентификатор склада в числовой формат, если необходимо
@@ -160,12 +188,12 @@ function sendingAnOrderToSFTP(Main\Event $event)
             }
 
             $orderData['products'][] = [
-                'idproduct' => $productId,
+                'idproduct' => $externalId,
                 'sum' => $productSum,
-                'name' => $productName,
                 'price' => $productPrice,
                 'count' => $productQuantity,
-                'moving' => $moving
+                'moving' => $moving,
+                'bonus_points' => 0
             ];
 
         }
@@ -217,4 +245,3 @@ function OnBeforeStatusUpdateHandler($orderId, &$newStatus, &$oldStatus)
         file_put_contents($filename, $jsonString);
     }
 }
-

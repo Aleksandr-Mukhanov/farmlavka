@@ -13,7 +13,6 @@ class farmlavka extends CBitrixComponent
 {
     function order()
     {
-
         $userID = Sale\Fuser::getId();
         $siteID = Bitrix\Main\Context::getCurrent()->getSite();
         $currencyCode = CurrencyManager::getBaseCurrency();
@@ -30,17 +29,17 @@ class farmlavka extends CBitrixComponent
         // товары в корзине
         $basketItems = $basket->getBasketItems();
         foreach ($basket as $basketItem) {
-          // dump($basketItem);
-          $productID = $basketItem->getField('PRODUCT_ID');
-          $arBasketItems[$productID] = [
-              'NAME' => $basketItem->getField('NAME'),
-              'URL' => $basketItem->getField('DETAIL_PAGE_URL'),
-              'PRICE' => $basketItem->getField('PRICE'),
-              'BASE_PRICE' => $basketItem->getField('BASE_PRICE'),
-              'DISCOUNT_PRICE' => $basketItem->getField('DISCOUNT_PRICE'),
-              'QUANTITY' => $basketItem->getField('QUANTITY'),
-          ];
-          $arItemIds[] = $productID;
+            // dump($basketItem);
+            $productID = $basketItem->getField('PRODUCT_ID');
+            $arBasketItems[$productID] = [
+                'NAME' => $basketItem->getField('NAME'),
+                'URL' => $basketItem->getField('DETAIL_PAGE_URL'),
+                'PRICE' => $basketItem->getField('PRICE'),
+                'BASE_PRICE' => $basketItem->getField('BASE_PRICE'),
+                'DISCOUNT_PRICE' => $basketItem->getField('DISCOUNT_PRICE'),
+                'QUANTITY' => $basketItem->getField('QUANTITY'),
+            ];
+            $arItemIds[] = $productID;
         }
         $arOrder = ['SORT'=>'ASC'];
         $arFilter = ['IBLOCK_ID'=>1,'ID'=>$arItemIds];
@@ -77,42 +76,21 @@ class farmlavka extends CBitrixComponent
             'filter' => ['ID'=>$_SESSION["SOTBIT_REGIONS"]['STORE'],'ACTIVE'=>'Y'],
             'select' => ['ID','TITLE','ADDRESS','GPS_N','GPS_S','PHONE','SCHEDULE','UF_CARD','UF_AVAILABLE']
         ]);
-
-
-        // Функция для очистки адреса
-        function cleanAddress($address) {
-            // Убираем ненужные слова (ул., д., г.)
-            $patterns = ['/г\.?\s*/', '/ул\.?\s*/', '/д\.?\s*/', '/,\s*/'];
-            $address = preg_replace($patterns, '', $address);
-
-            // Приводим строку к нижнему регистру и убираем лишние пробелы
-            $address = mb_strtolower(trim($address));
-
-            return $address;
-        }
-
-        $addressFromFront = cleanAddress($_REQUEST['STORE']);
-        $actualStoreId = '';
-
+        $storeIdToFTP = '';
 
         while($arStore = $rsStore->fetch())
         {
             $arStore['COORDINATES'] = $arStore['GPS_N'].','.$arStore['GPS_S'];
-
-            // Очищаем адрес склада для сравнения
-            $cleanStoreAddress = cleanAddress($arStore['ADDRESS']);
-            if (strpos($cleanStoreAddress, $addressFromFront) !== false) {
-                $actualStoreId = $arStore['ID'];
-            }
-
+            $storeIdToFTP = $arStore['ID'];
             foreach ($arStore['UF_CARD'] as $value)
                 $arStore['UF_CARD_NAME'][] = $arCard[$value];
+
             $arStores[$arStore['ID']] = $arStore;
         }
 
         // склады Поставщиков для которых всегда доступно
         $rsStore = \Bitrix\Catalog\StoreTable::getList([
-            'filter' => ['ADDRESS'=>'-','ACTIVE'=>'Y'],
+            'filter' => ['ADDRESS'=>'не указано','ACTIVE'=>'Y'],
             'select' => ['ID','TITLE']
         ]);
 
@@ -136,10 +114,8 @@ class farmlavka extends CBitrixComponent
             $arStoreAvail[$arStoreProduct['STORE_ID']][$arStoreProduct['PRODUCT_ID']] = $arStoreProduct['AMOUNT'];
         } // dump($arStoreAvail);
 
-        // dump($_REQUEST);
-        if($_REQUEST['SEND_ORDER'] == 'Оформить заказ')
+        if($_REQUEST['SEND_ORDER'])
         {
-            error_log("Начат процесс создания заказа...", 3, "/var/log/order_cancel.log");
             $orderFIO = $_REQUEST['orderFIO'];
             $orderMail = $_REQUEST['orderMail'];
             $orderPhone = $_REQUEST['orderPhone'];
@@ -149,6 +125,7 @@ class farmlavka extends CBitrixComponent
             $orderSQOffice = $_REQUEST['SQ_OFFICE'];
             $orderIntercomCode = $_REQUEST['INTERCOM_CODE'];
             $orderPaySystem = $_REQUEST['PAY_SYSTEM'];
+
 
             // привяжем к пользователю
             global $USER;
@@ -187,12 +164,13 @@ class farmlavka extends CBitrixComponent
             $order->setField('CURRENCY', $currencyCode);
             $order->setBasket($basket);
 
-
-            $order->setField('USER_DESCRIPTION', $actualStoreId . '');
+            // выбранный склад
             if ($_REQUEST['STORE'])
-                $order->setField('USER_DESCRIPTION', $actualStoreId . '');
+              $order->setField('USER_DESCRIPTION', $_REQUEST['STORE'] . '');
+            else
+              $order->setField('USER_DESCRIPTION', $storeIdToFTP . '');
 
-//            $order->setField('USER_DESCRIPTION', 'Склад: '.$_REQUEST['STORE']);
+            // $order->setField('USER_DESCRIPTION', 'Склад: '.$_REQUEST['STORE']);
 
             // Создаём одну отгрузку и устанавливаем способ доставки - "Без доставки" (он служебный)
             $shipmentCollection = $order->getShipmentCollection();
@@ -203,6 +181,7 @@ class farmlavka extends CBitrixComponent
                 $service = Delivery\Services\Manager::getById(Delivery\Services\EmptyDeliveryService::getEmptyDeliveryServiceId());
                 $deliveryID = $service['ID'];
             }
+
             // привязываем доставку
             $shipment->setFields(['DELIVERY_ID' => $deliveryID]);
             // $shipmentItemCollection = $shipment->getShipmentItemCollection();
@@ -248,30 +227,12 @@ class farmlavka extends CBitrixComponent
             if (!$result->isSuccess()) {
                 $arResult['RESULT'] = 'Ошибка создания заказа: '.$result->getErrors();
             }else{
-                $arResult['RESULT'] = 'Заказ №'.$order->getId().' создан успешно.';
-//                $arResult['RESULT'] = 'Магазин id: '.$actualStoreId.'.';
+                $arResult['RESULT'] = 'Заказ №'.$order->getId().' создан успешно!';
 
                 // для оплаты
                 $paySystemBufferedOutput = $paySystemService->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);
                 $arResult['PAYMENT_TEMPLATE'] = $paySystemBufferedOutput->getTemplate();
             }
-        }elseif ($_REQUEST['action'] == 'orderCancel'){
-            error_log("Начат процесс отмены заказа...", 3, "/var/log/order_cancel.log");
-            $order = \Bitrix\Sale\Order::load($_REQUEST['orderID']);
-            $order->setField("CANCELED","Y");
-            $order->setField('STATUS_ID',"V"); //статус
-            $order->save();
-            $orderId = $order->GetId();
-            $directory = '/home/back1c/ftp/cancelledByClient/';
-            $filename = $directory . $orderId . '.json';
-            $testData = [
-                'id' => $orderId,
-                'status' => 'canceled_by_client',
-            ];
-            $jsonString = json_encode($testData, JSON_UNESCAPED_UNICODE);
-            file_put_contents($filename, $jsonString);
-            $arResult['RESULT'] = 'Заказ №'.$order->getId().' отменен.';
-            error_log("Заказ №" . $order->getId() . " отменен", 3, "/var/log/order_cancel.log");
         }
 
         $arResult['BASKET'] = $arBasketItems;

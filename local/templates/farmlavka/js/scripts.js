@@ -50,6 +50,18 @@ $(document).ready(function(){
     if (formActive.hasClass('active')) $('.header__search__input__block').submit();
   });
 
+  $('body').on('click', '.password-control', function(){
+    ourInput = $(this).parent().find('input');
+  	if (ourInput.attr('type') == 'password'){
+  		$(this).addClass('view');
+  		ourInput.attr('type', 'text');
+  	} else {
+  		$(this).removeClass('view');
+  		ourInput.attr('type', 'password');
+  	}
+  	return false;
+  });
+
   // показать текст
   // $('.reviews__href').click(function(){
   //   event.preventDefault();
@@ -524,8 +536,9 @@ $(document).ready(function(){
     paySystemShow(1);
 
   $('input[name=STORE]').change(function(){
-    storeVal = $(this).val(); // console.log(storeVal);
-    switch(storeVal){
+    // storeVal = $(this).val(); // console.log(storeVal);
+    storeName = $(this).attr('data-name'); // console.log(storeName);
+    switch(storeName){
       case 'Зелинского 6': paySystem = 2; break;
       case 'Коломенская 5В': paySystem = 2; break;
       case 'Ломоносова 107Б': paySystem = 2; break;

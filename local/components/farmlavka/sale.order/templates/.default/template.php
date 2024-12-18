@@ -186,22 +186,39 @@ global $USER;
 								</tr>
 	              <?foreach ($arResult['STORES'] as $store) {
 										// соберем наличие
-										foreach ($arResult['STORES_AVAIL'][$store['ID']] as $productID => $productQNT)
+										if ($arResult['STORES_AVAIL'][$store['ID']]) // если есть в наличии на складе
 										{
-											// прибавим наличие на складах поставщиков
-											foreach ($arResult['STORES_ALWAYS'] as $storeID)
-												$productQNT += $arResult['STORES_AVAIL'][$storeID][$productID];
+											foreach ($arResult['STORES_AVAIL'][$store['ID']] as $productID => $productQNT)
+											{
+												// прибавим наличие на складах поставщиков
+												foreach ($arResult['STORES_ALWAYS'] as $storeID)
+													$productQNT += $arResult['STORES_AVAIL'][$storeID][$productID];
 
-											if ((int)$productQNT >= (int)$arResult['BASKET'][$productID]['QUANTITY'])
-												$arProductAvail[] = $productID;
+												if ((int)$productQNT >= (int)$arResult['BASKET'][$productID]['QUANTITY'])
+													$arProductAvail[] = $productID;
+											}
 										}
+										else // когда нет на складах
+										{
+											foreach ($arResult['BASKET'] as $productID => $arProduct)
+											{
+												$productQNT = 0;
+												// прибавим наличие на складах поставщиков
+												foreach ($arResult['STORES_ALWAYS'] as $storeID)
+													$productQNT += $arResult['STORES_AVAIL'][$storeID][$productID];
+
+												if ((int)$productQNT >= (int)$arResult['BASKET'][$productID]['QUANTITY'])
+													$arProductAvail[] = $productID;
+											}
+										}
+
 										$disabled = ($arProductAvail && (count($arProductAvail) == count($arResult['BASKET']))) ? '' : 'disabled';
 								?>
 	                <tr class="address__tr__body available_<?=$store['UF_AVAILABLE']?>">
 	                  <td class="address__td-body">
 	                    <div class="address__td__block" >
                         <div class="address__td__choose">
-                          <input type="radio" name="STORE" id="store_<?=$store['ID']?>" value="<?=$store['TITLE']?>" class="<?=($disabled)?'store-disabled':''?>" data-product=<?=($arProductAvail)?implode(',',$arProductAvail):''?>>
+                          <input type="radio" name="STORE" id="store_<?=$store['ID']?>" value="<?=$store['ID']?>" class="<?=($disabled)?'store-disabled':''?>" data-name="<?=$store['TITLE']?>" data-product=<?=($arProductAvail)?implode(',',$arProductAvail):''?>>
                           <label for="store_<?=$store['ID']?>" class="address__td-text"><?=$store['TITLE']?></label>
                           <span class="<?=$disabled?>" title="В этой аптеке можно забрать все товары">✔</span>
                           <span class="<?=$disabled?> not" title="В этой аптеке доступны не все товары">𐄂</span>

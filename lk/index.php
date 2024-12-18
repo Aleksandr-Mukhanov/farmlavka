@@ -41,8 +41,8 @@ if ($sendForm) {
   $arFieldsUser['EMAIL'] = $userEmail;
 
   if ($new_password) {
-    $arFieldsUser['NEW_PASSWORD'] = $new_password;
-    $arFieldsUser['NEW_PASSWORD_CONFIRM'] = $confirm_password;
+    $arFieldsUser['PASSWORD'] = $new_password;
+    $arFieldsUser['PASSWORD_CONFIRM'] = $confirm_password;
   }
 
   if($user->Update($userID,$arFieldsUser))
@@ -109,6 +109,13 @@ while ($arElement = $rsElements->Fetch()) {
           <p class="a-left__text">Обратная связь</p>
         </a>
       </li>
+      <?if($userID):?>
+        <li class="a-left__item">
+          <a href="?logout=yes&<?=bitrix_sessid_get()?>" class="a-left__item-body">
+            <p>Выйти</p>
+          </a>
+        </li>
+      <?endif;?>
     </ul>
   </div>
   <div class="a-main__a-right">
@@ -250,7 +257,7 @@ while ($arElement = $rsElements->Fetch()) {
             </tbody>
           </table>
           <div class="ch-order__cht-bottom">
-            <a href="/reviews/#feedbackAdd" class="button">Оставить отзыв</a>
+            <a href="/info/reviews/#feedbackAdd" class="button">Оставить отзыв</a>
             <a href="/cart/" class="button cht-bottom__button orderRepeat" data-id="<?=implode(',',$arProductID)?>">Повторить заказ</a>
             <?if(!in_array($order['STATUS_ID'],['V','F'])):?>
               <a href="/lk/" class="button cht-bottom__button orderCancel" data-id="<?=$order['ID']?>">Отменить заказ</a>
@@ -259,6 +266,7 @@ while ($arElement = $rsElements->Fetch()) {
         </div>
       <?}?>
     <?endif;?>
+
     <form class="feedback sendForm" id="feedback" action="" method="post" data-title="Обратная связь">
       <h3 class="footer__question__title feedback__title">Обратная связь</h3>
       <div class="feedback__body">
@@ -279,7 +287,7 @@ while ($arElement = $rsElements->Fetch()) {
           </div>
         </div>
         <div class="a-content__input-item">
-          <input class="a-content-i" type="text" placeholder="Текст сообщения" name="text">
+          <input class="a-content-i" type="text" placeholder="Текст сообщения" name="text" required>
         </div>
         <div class="a-content__bottom">
           <button type="submit" class="button a-content__button">Сохранить</button>
@@ -287,6 +295,7 @@ while ($arElement = $rsElements->Fetch()) {
         </div>
       </div>
     </form>
+
   </div>
 </div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

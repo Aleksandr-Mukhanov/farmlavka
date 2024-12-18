@@ -1,54 +1,57 @@
-.hide, .block_hide{
+.hide, .block_hide {
   display: none;
 }
 
-.ch-delivery__inputs_add{
+.ch-delivery__inputs_add {
   display: flex;
   grid-gap: 20px;
 }
 
-.brand__item__body.active{
+.brand__item__body.active {
   color: #71c476;
 }
 
-.block_delivery__card{
+.block_delivery__card {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.select-city__dropdown-wrap{
+.select-city__dropdown-wrap {
   top: 35px;
 }
 
-.select-city__modal__submit__vars{
+.select-city__modal__submit__vars {
   left: 15px;
   padding: 5px 10px;
 }
 
-div.search-popup{
+div.search-popup {
   border: 1px solid #e0e0e0;
   border-radius: 15px;
   padding: 5px 10px;
   margin-top: 5px;
 }
-div.search-popup-row, div.search-popup-row-active{
+
+div.search-popup-row, div.search-popup-row-active {
   border-radius: 5px;
 }
 
-.search-page .city__input{
+.search-page .city__input {
   width: 50%;
 }
 
 /*blog start*/
-.a-video__block__video{
+.a-video__block__video {
   position: relative;
 }
-.video_play{
+
+.video_play {
   cursor: pointer;
   position: absolute;
   top: 35%;
   left: 42%;
 }
+
 .modal-open {
   cursor: pointer;
 }
@@ -102,65 +105,89 @@ div.search-popup-row, div.search-popup-row-active{
   display: block;
 }
 
-.store-avail{
+.store-avail {
   color: red;
   display: none;
 }
 
-.popup-new.popupOutStock{
+.popup-new.popupOutStock {
   margin-top: 20%;
 }
 
-.product-page .product-card__b-button{
+.product-page .product-card__b-button {
   display: block;
 }
 
-.checkout__body .mb-4{
+.checkout__body .mb-4 {
   margin-bottom: 40px;
 }
-.checkout__body .button{
+
+.checkout__body .button {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.product-card__price__1{
+.product-card__price__1 {
   white-space: nowrap;
 }
 
-.text_format h2{
+.text_format h2 {
   font-size: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   color: #000;
 }
-.text_format p{
+
+.text_format p {
   margin-bottom: 10px;
 }
+
 .text_format ul,
-.text_format ol{
+.text_format ol {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 40px;
 }
+
 .text_format ul li,
-.text_format ol li{
+.text_format ol li {
   margin-bottom: 10px;
   list-style: auto;
 }
 
-.block-faq .page__text b{
+.block-faq .page__text b {
   font-weight: bold;
   color: black;
   font-size: 22px;
 }
 
-.company__body h3{
+.company__body h3 {
   font-weight: bold;
   color: #000;
   margin-bottom: 10px;
 }
 
-.header-mobile__menu .header-mobile__search .header__search__input__block .header__search__input{
+.header-mobile__menu .header-mobile__search .header__search__input__block .header__search__input {
   width: 100%;
   padding: 0 35px;
+}
+
+/* показать/скрыть пароль */
+.password {
+  position: relative;
+}
+
+.password-control {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url('img/svg/pass_view.svg') 0 0 no-repeat;
+  cursor: pointer;
+}
+
+.password-control.view {
+  background: url('img/svg/pass_no-view.svg') 0 0 no-repeat;
 }

@@ -80,8 +80,9 @@
         <div class="popup-new__block-name personal-area__input-b">
           <input class="popup-new__input popup-new__input-name phoneMask" type="tel" name="phone" placeholder="Ваш телефон" required></input>
         </div>
-        <div class="popup-new__block-email personal-area__input-b">
-          <input class="popup-new__input popup-new__input-email" type="text" name="password" placeholder="Пароль" required></input>
+        <div class="popup-new__block-email personal-area__input-b password">
+          <input class="popup-new__input popup-new__input-email" type="password" name="password" placeholder="Пароль" required></input>
+          <span class="password-control"></span>
         </div>
         <div class="popup-new__bottom-block">
           <button type='submit' class="popup-request button popup-new__button shadow_green">Войти</button>
@@ -109,11 +110,13 @@
         <div class="popup-new__block-name personal-area__input-b">
           <input class="popup-new__input popup-new__input-name phoneMask" type="tel" name="phone" placeholder="Ваш телефон" required></input>
         </div>
-        <div class="popup-new__block-email personal-area__input-b">
-          <input class="popup-new__input popup-new__input-email" type="text" name='password' placeholder="Пароль" required></input>
+        <div class="popup-new__block-email personal-area__input-b password">
+          <input class="popup-new__input popup-new__input-email" type="password" name='password' placeholder="Пароль" required></input>
+          <span class="password-control"></span>
         </div>
-        <div class="popup-new__block-email  personal-area__input-b registration__input-b_1">
-          <input class="popup-new__input popup-new__input-email" type="text" name="password_confirm" placeholder="Пароль ещё раз" required></input>
+        <div class="popup-new__block-email  personal-area__input-b password registration__input-b_1">
+          <input class="popup-new__input popup-new__input-email" type="password" name="password_confirm" placeholder="Пароль ещё раз" required></input>
+          <span class="password-control"></span>
         </div>
         <div class="popup-new__bottom-block">
           <button type='submit' class="popup-request button popup-new__button shadow_green">регистрация</button>
@@ -170,11 +173,13 @@
         <div class="popup-new__block-name personal-area__input-b">
           <input class="popup-new__input popup-new__input-name phoneMask" type="tel" name="phone" placeholder="Ваш телефон" required></input>
         </div>
-        <div class="popup-new__block-email personal-area__input-b">
-          <input class="popup-new__input popup-new__input-email" type="text" name='password' placeholder="Пароль" required></input>
+        <div class="popup-new__block-email personal-area__input-b password">
+          <input class="popup-new__input popup-new__input-email" type="password" name='password' placeholder="Пароль" required></input>
+          <span class="password-control"></span>
         </div>
-        <div class="popup-new__block-email  personal-area__input-b registration__input-b_1">
-          <input class="popup-new__input popup-new__input-email" type="text" name="password_confirm" placeholder="Пароль ещё раз" required></input>
+        <div class="popup-new__block-email personal-area__input-b password registration__input-b_1">
+          <input class="popup-new__input popup-new__input-email" type="password" name="password_confirm" placeholder="Пароль ещё раз" required></input>
+          <span class="password-control"></span>
         </div>
         <div class="popup-new__bottom-block">
           <button type='submit' class="popup-request button popup-new__button shadow_green">регистрация</button>

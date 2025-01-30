@@ -11,11 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.onclick = function (ev) {
-      const myDiv = document.getElementById("searchHeader");
-      if (!myDiv.contains(ev.target)) {
-        searchBlockNone.classList.remove("active");
-        searchBlock.classList.remove("active");
-        inputSearch.placeholder = "";
+      searchValue = inputSearch.value;
+      if (!searchValue) { // если нет значения, скроем поиск при клике мимо
+        const myDiv = document.getElementById("searchHeader");
+        if (!myDiv.contains(ev.target)) {
+          searchBlockNone.classList.remove("active");
+          searchBlock.classList.remove("active");
+          inputSearch.placeholder = "";
+        }
       }
     };
   }

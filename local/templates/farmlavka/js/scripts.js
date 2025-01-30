@@ -45,21 +45,26 @@ $(document).ready(function(){
   $('.phoneMask').mask('+7 (999) 999-99-99');
 
   // клик по поиску в шапке
-  $('.header__search__input-svg').click(function(){
-    formActive = $(this).parent().parent();
-    if (formActive.hasClass('active')) $('.header__search__input__block').submit();
+  // $('.header__search__input-svg').click(function(){
+  //   searchInputVal = $('.header__search__input').val();
+  //   if (searchInputVal){
+  //     formActive = $(this).parent().parent();
+  //     if (formActive.hasClass('active')) $('.header__search__input__block').submit();
+  //   }
+  // });
+
+  // фиксированная шапка
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100)
+      $('.header').addClass('header_fixed');
+    else
+      $('.header').removeClass('header_fixed');
   });
 
-  $('body').on('click', '.password-control', function(){
-    ourInput = $(this).parent().find('input');
-  	if (ourInput.attr('type') == 'password'){
-  		$(this).addClass('view');
-  		ourInput.attr('type', 'text');
-  	} else {
-  		$(this).removeClass('view');
-  		ourInput.attr('type', 'password');
-  	}
-  	return false;
+  // отображение отзывов
+  $('.reviewStars').change(function(){
+    stars = $(this).val();
+    $('.cnt_stars_'+stars).slideToggle();
   });
 
   // показать текст
@@ -86,13 +91,6 @@ $(document).ready(function(){
         }
     });
 	});
-
-  // переключение в модалке авторизации
-  $(".btnAuth").click(function() {
-    $(this).parents('.popup-new__body').slideUp();
-    div = $(this).attr('data-div');
-    $('#'+div).slideDown();
-  });
 
   // авторизация
   $(".formAuth").submit(function() {
@@ -483,7 +481,7 @@ $(document).ready(function(){
 
   // показать номер самовывоза
   $('.address__td-show').click(function(){
-    $(this).parent().find('.address__td__block__tell').css({'max-width':'100%'});
+    $(this).hide().parent().find('.address__td__block__tell').css({'max-width':'100%'});
   });
 
   // Наличие в аптеках
@@ -500,7 +498,7 @@ $(document).ready(function(){
       $('.address__tr__body').slideDown();
   });
 
-  // выбор апетки
+  // выбор аптеки
   $('.store-disabled').click(function(){
     arProduct = $(this).attr('data-product').split(',');
     console.log(arProduct);
@@ -552,12 +550,44 @@ $(document).ready(function(){
   });
 });
 
+// переключение в модалке авторизации
+$(document).on('click', '.btnAuth', function() {
+  block = $(this).attr('data-block');
+  $(this).parents('.popup-new__body').slideUp();
+  $('#'+block).slideDown();
+  console.log('click auth');
+});
+
+// показ пароля
+$(document).on('click', '.password-control', function(){
+  ourInput = $(this).parent().find('input');
+  if (ourInput.attr('type') == 'password'){
+    $(this).addClass('view');
+    ourInput.attr('type', 'text');
+  } else {
+    $(this).removeClass('view');
+    ourInput.attr('type', 'password');
+  }
+});
+
 // выбор города в выпадающем списке
 $(document).on('click', '.regions_vars', function(){
   $('.submitCity').trigger('click');
 });
 
-// клик по результату посика
-$(document).on('click', '.search-popup-row-active', function(){
-  $('.header__search__input__block').submit();
+// клик по подсказкам поиска
+$(document).on('click', '.search-popup-row-active', function()
+{
+  // elementText = $(this).find('.search-popup-el-name').text();
+  header__search = $('.header__search');
+  header__search_mobile = $('.header-mobile__menu');
+
+  if (header__search.hasClass('active')) {
+    // header__search.find('input[type=search]').val(elementText);
+    header__search.find('.searchSend').trigger('click');
+  }
+  else if (header__search_mobile.hasClass('active')){
+    // header__search_mobile.find('input[type=search]').val(elementText);
+    header__search_mobile.find('.searchSend').trigger('click');
+  }
 });

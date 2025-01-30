@@ -40,6 +40,26 @@ $coupon = 'SL-5WFJS-EMD4IO2S';
 // $result = $oDiscounts->getApplyResult();
 // dump($result);
 
+// отправка почты
+// if (mail('mukhanov.au@gmail.com','test1','test1'))
+// 	echo 'ok gmail';
+// else
+// 	echo 'no gmail';
+//
+// echo '<br>';
+//
+// if (mail('mukhanov.au@ya.ru','test2','test2'))
+// 	echo 'ok ya';
+// else
+// 	echo 'no ya';
+//
+// echo '<br>';
+//
+// if (mail('muxa___@mail.ru','test3','test3'))
+// 	echo 'ok mail';
+// else
+// 	echo 'no mail';
+
 $orderID = 320;
 $order = Order::load($orderID);
 $paymentCollection = $order->getPaymentCollection();

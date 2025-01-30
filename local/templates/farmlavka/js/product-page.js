@@ -104,14 +104,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.addEventListener("DOMContentLoaded", () => {
   let ppItems = document.querySelectorAll(".pp-content__item");
-  document
-    .querySelector(".pp-content__item_1")
-    .addEventListener("click", (e) => {
-      // console.log("asd");
-      ppItems.forEach((e) => {
-        e.classList.toggle("active");
+  if (ppItems) {
+    let ppItems1 = document.querySelector(".pp-content__item_1");
+    if (ppItems1) {
+      ppItems1.addEventListener("click", (e) => {
+        // console.log("asd");
+        ppItems.forEach((e) => {
+          e.classList.toggle("active");
+        });
       });
-    });
+    }
+  }
 });
 document.addEventListener("DOMContentLoaded", () => {
   new ImageZoom(document.getElementById("slide-image"), {

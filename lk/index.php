@@ -129,7 +129,7 @@ while ($arElement = $rsElements->Fetch()) {
       </div>
     <?else:?>
       <form class="a-right__a-content" id="a-content" action="" method="post">
-        <h3 class="footer__question__title feedback__title">Личный данные</h3>
+        <h3 class="footer__question__title feedback__title">Личные данные</h3>
         <div class="a-content__input-block">
           <input class="a-content__input" name="FIO" placeholder="Укажите фамилию, имя и отчество" value="<?=$USER->GetFullName()?>">
         </div>
@@ -163,48 +163,7 @@ while ($arElement = $rsElements->Fetch()) {
         </div>
       </form>
 
-      <div id="order" class="checkout__ch-order display-none">
-        <h3 class="footer__question__title">Ваш заказ</h3>
-        <table class="ch-order__table">
-          <tbody>
-            <tr>
-              <td class="a-order__text-1">16.12.2021</td>
-              <td class="a-order__text-2">Заказ №:154544516</td>
-              <td class="a-order__text-3">Выполнен</td>
-            </tr>
-            <tr class="ch-order__tr">
-              <td class="ch-order__td">
-                <div class="b-order__right">
-                  <div class="product-card__block__img b-order__block-img">
-                    <div class="product-card__img ch-order__p-img ">
-                      <img class="b-order__img ch-order__img" src="./img/main-content/product-3.jpg" alt="таблетка">
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="order__right ch-order__right">
-                  <p class="product-card__title fz-16px">
-                    Велсон таблетки покрыт. плен. об. 3 мг, 30 шт.
-                  </p>
-                </div>
-              </td>
-              <td class="ch-order__td">
-                <div class="product-card__price ch-order__price a-ch-order__price">
-                  <p class="product-card__price__1 a-ch-order__card_1 fz-24px">
-                    41 108 руб.
-                  </p>
-                  <div class="ch-order__card_2 a-ch-order__td">
-                    <p class="product-card__price__2 ch-order__card_2__text fz-14px">
-                      49 999 руб.
-                    </p>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <h3 class="footer__question__title feedback__title" id="order">Ваши заказы</h3>
 
       <?foreach ($arSales as $order) {?>
         <div class="checkout__ch-order personal-area__order-b">

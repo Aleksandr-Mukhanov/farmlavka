@@ -5,7 +5,7 @@ $APPLICATION->SetTitle("Контакты");?><div class="_container contacts-pag
 			<div class="c-contacts__ofice">
 				<div class="c-contacts__ofice-body">
 					<p class="c-contacts__ofice-text">
-						Главный офис
+						 Главный офис
 					</p>
 					<h2 class="c-contacts__ofice-title"></h2>
 				</div>
@@ -45,15 +45,15 @@ $APPLICATION->SetTitle("Контакты");?><div class="_container contacts-pag
 				<div class="c-net__link-block">
  <a class="c-net__link" href="<?=$arSetting['vk']?>" target="_blank">
 					<p class="c-net__text">
-						<?=$arSetting['vk']?>
+						 <?=$arSetting['vk']?>
 					</p>
  </a> <a class="c-net__link" href="<?=$arSetting['instagram']?>" target="_blank">
 					<p class="c-net__text c-net__text-2">
-						<?=$arSetting['instagram']?>
+						 <?=$arSetting['instagram']?>
 					</p>
  </a> <a class="c-net__link" href="<?=$arSetting['youtube']?>" target="_blank">
 					<p class="c-net__text c-net__text-3">
-						<?=$arSetting['youtube']?>
+						 <?=$arSetting['youtube']?>
 					</p>
  </a>
 				</div>
@@ -64,23 +64,23 @@ $APPLICATION->SetTitle("Контакты");?><div class="_container contacts-pag
 			<div class="c-requisites__text-block">
 				<p class="c-requisites__text">
  <span class="c-requisites__span">
-					ИНН/КПП <br>
+					ИНН/КПП&nbsp;5005007369<br>
  </span>
 				</p>
 				<p class="c-requisites__text">
  <span class="c-requisites__span">
-					р/с </span>
+					р/с ларлпрарпл</span>
 				</p>
 				<p class="c-requisites__text">
  <span class="c-requisites__span">
-					БИК </span>
+					БИК&nbsp;</span>5005007369
 				</p>
 			</div>
 		</div>
 		<div class="contacts__с-call-back">
 			<div class="footer__question__body с-call-back__body">
 				<p class="footer__question__title">
-					Мы вам перезвоним
+					 Мы вам перезвоним
 				</p>
 				<form class="footer__question__form с-call-back__form sendForm" action="" method="post" data-title="Мы вам перезвоним">
  <input class="footer__question__input с-call-back__input" id="name" placeholder="Иванов Иван Иванович" name="name" type="text"> <input class="footer__question__input с-call-back__input phoneMask" id="number" placeholder="+7 (___) ___-__-__" name="phone" type="tel" required="">
@@ -95,7 +95,7 @@ $APPLICATION->SetTitle("Контакты");?><div class="_container contacts-pag
 	<div class="contacts__с-how">
 		<h2 class="footer__question__title">Как проехать</h2>
 		<p class="company-page__text">
-			<br>
+ <br>
 		</p>
 	</div>
 	<div class="delivery__d-map">
@@ -106,17 +106,18 @@ $APPLICATION->SetTitle("Контакты");?><div class="_container contacts-pag
  <br>
 		<h3 class="company-page__text text-color_level-3">Арендодателям</h3>
 		<p class="company-page__text">
-			<br>
+ <br>
 		</p>
  <br>
 		<h3 class="company-page__text text-color_level-3">Для предложений</h3>
 		<p class="company-page__text">
-			<br>
+ <br>
 		</p>
  <br>
 		<h3 class="company-page__text text-color_level-3">Центральный офис</h3>
 		<p class="company-page__text">
-			<br>
+ <br>
 		</p>
 	</div>
-</div><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+</div>
+ <br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

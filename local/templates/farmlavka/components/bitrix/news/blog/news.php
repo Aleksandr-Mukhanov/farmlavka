@@ -130,6 +130,7 @@ while($ar_fields = $res->GetNext())
 );?>
 		</div>
 		<div class="tags__section">
+			<?/*?>
 			<h2 class="tags__title">ТЕГИ</h2>
 			<div class="tags instruction-left__tags">
 				<?foreach ($arTags as $key => $tag) {?>
@@ -137,9 +138,8 @@ while($ar_fields = $res->GetNext())
 						<p class="tag__text"><?=$tag?></p>
 					</a>
 				<?}?>
-
-
 			</div>
+			<?*/?>
 	<? //} ?>
 	<!--  -->
 	<div class="js-data" data-section="" data-tag="">

@@ -20,6 +20,7 @@ if (isset($_COOKIE['favorites']))
 	$arFavorites = explode('-',$_COOKIE['favorites']);
 
 $favoritesActive = ($arFavorites && in_array($arResult['ID'],$arFavorites)) ? 'active' : '';
+$picture = ($arResult['DETAIL_PICTURE']['SRC']) ? $arResult['DETAIL_PICTURE']['SRC'] : SITE_TEMPLATE_PATH.'/img/no-photo.jpeg';
 ?>
 <section class="product-page">
 	<div class="_container">
@@ -39,9 +40,9 @@ $favoritesActive = ($arFavorites && in_array($arResult['ID'],$arFavorites)) ? 'a
 				<a href="#block_reviews" class="pp-content__item">
 					Отзывы
 				</a>
-				<a href="#block_delivery" class="pp-content__item">
+				<!-- <a href="#block_delivery" class="pp-content__item">
 					Доставка
-				</a>
+				</a> -->
 				<a href="#block_pickup" class="pp-content__item">
 					Самовывоз
 				</a>
@@ -65,7 +66,7 @@ $favoritesActive = ($arFavorites && in_array($arResult['ID'],$arFavorites)) ? 'a
 							<div class="label__pickup_only">Только самовывоз</div>
 						<?endif;?>
 						<div class="img-bl__big-img__block " id="slide-image" >
-							<img class="" src="<?=$arResult['DETAIL_PICTURE']['SRC']?>" alt="<?=$arResult['DETAIL_PICTURE']['ALT']?>" title="<?=$arResult['DETAIL_PICTURE']['TITLE']?>">
+							<img class="" src="<?=$picture?>" alt="<?=$arResult['DETAIL_PICTURE']['ALT']?>" title="<?=$arResult['DETAIL_PICTURE']['TITLE']?>">
 						</div>
 					</div>
 				</div>
@@ -145,8 +146,8 @@ $favoritesActive = ($arFavorites && in_array($arResult['ID'],$arFavorites)) ? 'a
 					</div>
 					<div class="pp-content__pp-info__pp-bottom" >
 						<div class="pp-bottom__pp-button-block" >
-							<div class="section__title pp-button-block__link pp-button-block__link_1 active" ><p>Доставка и самовывоз</p></div>
-							<div class="section__title pp-button-block__link pp-button-block__link_2" ><p>Условия хранения</p></div>
+							<div class="section__title pp-button-block__link pp-button-block__link_1 active" ><p>Самовывоз</p></div>
+							<!-- <div class="section__title pp-button-block__link pp-button-block__link_2" ><p>Условия хранения</p></div> -->
 						</div>
 						<div class="pp-button-block__pp-block-1" >
 							<?if($arResult['PROPERTIES']['RECEPT']['VALUE']):?>
@@ -158,17 +159,17 @@ $favoritesActive = ($arFavorites && in_array($arResult['ID'],$arFavorites)) ? 'a
 							<div class="pp-block-1__body " >
 							  <p class="pp-block-1__body__text pp-block-1__body__text_2" ><?=$_SESSION["SOTBIT_REGIONS"]['NAME']?></p>
 							  <p class="pp-block-1__body__text-bottom">
-							    Доставка сегодня, <span class="pp-block-1__body__text__span">бесплатно от 500 руб.</span><br>
+							    <!-- Доставка сегодня, <span class="pp-block-1__body__text__span">бесплатно от 500 руб.</span><br> -->
 							    Забрать из аптеки сегодня, <span class="pp-block-1__body__text__span">бесплатно</span>
 							  </p>
 							</div>
-							<div class="pp-block-1__body" >
+							<!-- <div class="pp-block-1__body" >
 							  <p class="pp-block-1__body__text pp-block-1__body__text_2" >За МКАД</p>
 							  <p class="pp-block-1__body__text-bottom">
 							    Доставка сегодня, <span class="pp-block-1__body__text__span">бесплатно от 500 руб.</span><br>
 							    Забрать из аптеки сегодня, <span class="pp-block-1__body__text__span">бесплатно</span>
 							  </p>
-							</div>
+							</div> -->
 						</div>
 						<div class="pp-button-block__pp-block-2" >
 							<div class="pp-block-1__body pp-block-2__body" >

@@ -24,4 +24,5 @@ $this->setFrameMode(true);?>
 		$component, array("HIDE_ICONS" => "Y")
 	);?>
 	<div class="svg city__input__svg header__search__input-svg"></div>
+	<input name="s" type="submit" value="" class="svg city__input__svg header__search__input-svg searchSend">
 </form>

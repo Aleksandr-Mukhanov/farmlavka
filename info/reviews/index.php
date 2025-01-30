@@ -58,7 +58,7 @@ $rating = round($scoreSum / count($arReview),2);
 				</div>
 				<div class="rp-left__bottom">
 					<div class="rp-left__srars">
-						<input class="rp-left__input" type="checkbox" id="reviewStars5" value="5">
+						<input class="rp-left__input reviewStars" type="checkbox" id="reviewStars5" value="5" checked>
 						<label for="reviewStars5">
 							<div class="stars second-block__item__stars product-card__start">
 								<div class="svg star-small star"></div>
@@ -72,7 +72,7 @@ $rating = round($scoreSum / count($arReview),2);
 						<p class="rp-left__reviews"><?=($arScore[5])?count($arScore[5]):0?> отзывов</p>
 					</div>
 					<div class="rp-left__srars">
-						<input class="rp-left__input" type="checkbox" id="reviewStars4" value="4">
+						<input class="rp-left__input reviewStars" type="checkbox" id="reviewStars4" value="4" checked>
 						<label for="reviewStars4">
 							<div class="stars second-block__item__stars product-card__start">
 								<div class="svg star-small star"></div>
@@ -86,7 +86,7 @@ $rating = round($scoreSum / count($arReview),2);
 						<p class="rp-left__reviews"><?=($arScore[4])?count($arScore[4]):0?> отзывов</p>
 					</div>
 					<div class="rp-left__srars">
-						<input class="rp-left__input" type="checkbox" id="reviewStars3" value="3">
+						<input class="rp-left__input reviewStars" type="checkbox" id="reviewStars3" value="3" checked>
 						<label for="reviewStars3">
 							<div class="stars second-block__item__stars product-card__start">
 								<div class="svg star-small star"></div>
@@ -100,7 +100,7 @@ $rating = round($scoreSum / count($arReview),2);
 						<p class="rp-left__reviews"><?=($arScore[3])?count($arScore[3]):0?> отзывов</p>
 					</div>
 					<div class="rp-left__srars">
-						<input class="rp-left__input" type="checkbox" id="reviewStars2" value="2">
+						<input class="rp-left__input reviewStars" type="checkbox" id="reviewStars2" value="2" checked>
 						<label for="reviewStars2">
 							<div class="stars second-block__item__stars product-card__start">
 								<div class="svg star-small star"></div>
@@ -114,7 +114,7 @@ $rating = round($scoreSum / count($arReview),2);
 						<p class="rp-left__reviews"><?=($arScore[2])?count($arScore[2]):0?> отзывов</p>
 					</div>
 					<div class="rp-left__srars">
-						<input class="rp-left__input" type="checkbox" id="reviewStars1" value="1">
+						<input class="rp-left__input reviewStars" type="checkbox" id="reviewStars1" value="1" checked>
 						<label for="reviewStars1">
 							<div class="stars second-block__item__stars product-card__start">
 								<div class="svg star-small star"></div>
@@ -172,7 +172,7 @@ $rating = round($scoreSum / count($arReview),2);
 
 				<ul class="reviews-right__body">
 					<?foreach ($arReview as $key => $review) {?>
-						<li class="review__li">
+						<li class="review__li cnt_stars_<?=$review['UF_SCORE']?>">
 							<div class="review__top">
 								<div class="rb__flex">
 									<p class="review__title">

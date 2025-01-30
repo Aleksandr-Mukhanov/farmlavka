@@ -350,7 +350,7 @@ $rating = round($scoreSum / count($arReview),2);
 
 <section class="product-filter">
 	<div class="_container product-filter_container">
-		<div class="product-filter__body">
+		<!-- <div class="product-filter__body">
 			<div class="product-filter__top">
 				<p class="main-title">Поиск по алфавиту</p>
 				<a href="/disease/" class="product-filter__suptitle">Выбор товара по заболеванию </a>
@@ -396,7 +396,7 @@ $rating = round($scoreSum / count($arReview),2);
 					</p>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "sections_index", Array(
 			"ADDITIONAL_COUNT_ELEMENTS_FILTER" => "additionalCountFilter",	// Дополнительный фильтр для подсчета количества элементов в разделе
 				"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации

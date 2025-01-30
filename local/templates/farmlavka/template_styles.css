@@ -161,9 +161,18 @@ div.search-popup-row, div.search-popup-row-active {
   font-size: 22px;
 }
 
-.company__body h3 {
+.product_detail .company{
+  margin-top: 30px;
+}
+.product_detail .company__body{
+  display: block;
+  font-size: 16px;
+  margin-top: 0;
+}
+.product_detail .company__body h3 {
   font-weight: bold;
   color: #000;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -190,4 +199,33 @@ div.search-popup-row, div.search-popup-row-active {
 
 .password-control.view {
   background: url('img/svg/pass_no-view.svg') 0 0 no-repeat;
+}
+
+/* поиск в шапке */
+.header__search input[type=submit].header__search__input-svg,
+.header-mobile__search input[type=submit].header__search__input-svg
+{
+  border: none;
+  background-color: transparent;
+}
+.header__search input[type=submit].header__search__input-svg{
+  display: none;
+}
+.header__search.active div.header__search__input-svg{
+  display: none;
+}
+.header__search.active input[type=submit].header__search__input-svg{
+  display: block;
+}
+
+.header_fixed{
+  position: fixed;
+  z-index: 999;
+  background-color: #fff;
+  top: 0;
+  width: 100%;
+}
+.header_fixed .header__top,
+.header_fixed .header__catalogs{
+  display: none;
 }

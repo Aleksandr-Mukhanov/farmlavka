@@ -34,13 +34,16 @@ global $USER;
 				<div class="checkout__ch-order">
 					<h3 class="footer__question__title">Ваш заказ</h3>
 					<table class="ch-order__table">
-						<?foreach ($arResult['BASKET'] as $itemID => $arItem) {?>
+						<?foreach ($arResult['BASKET'] as $itemID => $arItem) {
+							$picture = ($arItem['IMG']) ? $arItem['IMG'] : SITE_TEMPLATE_PATH.'/img/no-photo.jpeg';?>
 							<tr class="ch-order__tr" >
 								<td class="ch-order__td" >
 									<div class="b-order__right">
 									<div class="product-card__block__img b-order__block-img">
 										<div class="product-card__img ch-order__p-img ">
-											<img class="b-order__img ch-order__img" src="<?=$arItem['IMG']?>" alt="<?=$arItem['NAME']?>">
+											<a href="<?=$arItem['URL']?>">
+												<img class="b-order__img ch-order__img" src="<?=$picture?>" alt="<?=$arItem['NAME']?>" title="<?=$arItem['NAME']?>">
+											</a>
 										</div>
 									</div>
 									<div class="order__right ch-order__right">

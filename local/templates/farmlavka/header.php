@@ -339,11 +339,11 @@ use Bitrix\Main\Page\Asset,
               </a>
             </div>
           </div>
-          <div class="header__messages">
+          <!-- <div class="header__messages">
             <a href="<?=$arSetting['vk']?>" class="svg header__message header__message-1"></a>
             <a href="<?=$arSetting['instagram']?>" class="svg header__message header__message-2"></a>
             <a href="<?=$arSetting['youtube']?>" class="svg header__message header__message-3"></a>
-          </div>
+          </div> -->
         </div>
       </div>
       <?/*?>
@@ -400,14 +400,21 @@ use Bitrix\Main\Page\Asset,
           <div class="header_container">
             <?$APPLICATION->ShowViewContent('catalog_mobile');?>
             <div class="header__top__flex__block header__bottom__flex__block">
-              <a class="header__top__block ">
+              <a href="/favorites/" class="header__top__block">
                 <div class="header__city__svg header__city__svg__3"></div>
                 <span class="header__city__text header__city__text__bottom">Избранное</span>
               </a>
-              <a class="header__top__block myBtn" data-modal="myModal2">
-                <div class="header__city__svg header__city__svg__4"></div>
-                <span class="header__city__text header__city__text__bottom">Личный кабинет</span>
-              </a>
+              <?if($USER->IsAuthorized()):?>
+                <a class="header__top__block" href="/lk/">
+                  <div class="header__city__svg header__city__svg__4"></div>
+                  <span class="header__city__text header__city__text__bottom"><?=$USER->GetLogin()?></span>
+                </a>
+              <?else:?>
+                <a class="header__top__block myBtn" data-modal="myModal2">
+                  <div class="header__city__svg header__city__svg__4"></div>
+                  <span class="header__city__text header__city__text__bottom">Личный кабинет</span>
+                </a>
+              <?endif;?>
             </div>
           </div>
         </div>

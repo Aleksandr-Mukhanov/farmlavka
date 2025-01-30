@@ -21,6 +21,7 @@ if (isset($arResult['ITEM']))
 {
 	$item = $arResult['ITEM']; // dump($item);
 	$classSlide = ($arParams['SWIPER_SLIDE']) ? 'swiper-slide' : '';
+	$picture = ($item['PREVIEW_PICTURE']['SRC']) ? $item['PREVIEW_PICTURE']['SRC'] : SITE_TEMPLATE_PATH.'/img/no-photo.jpeg';
 	?>
 	<div class="product-card <?=$classSlide?>">
 	  <div class="product-card__block__img">
@@ -29,7 +30,7 @@ if (isset($arResult['ITEM']))
 					<div class="label__day_product">Товар дня</div>
 				<?endif;?>
 				<a href="<?=$item['DETAIL_PAGE_URL']?>">
-	      	<img src="<?=$item['PREVIEW_PICTURE']['SRC']?>" alt="<?=$item['DETAIL_PICTURE']['ALT']?>" title="<?=$item['DETAIL_PICTURE']['TITLE']?>"/>
+	      	<img src="<?=$picture?>" alt="<?=$item['PREVIEW_PICTURE']['ALT']?>" title="<?=$item['PREVIEW_PICTURE']['TITLE']?>"/>
 				</a>
 	    </div>
 	    <div class="product-card__favourite <?=$arParams['FAVORITES_ACTIVE']?> addFavorites" data-id="<?=$item['ID']?>" data-cookie="favorites"></div>

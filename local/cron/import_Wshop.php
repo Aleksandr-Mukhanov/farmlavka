@@ -7,7 +7,7 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\IO\File;
 // https://www.dev.farmlavka.ru/local/cron/import_Wshop.php?start=26000
 $fileName = 'WshopExport.csv';
-echo 'import '.$fileName.'<br><br>';
+$strCSV = "import ".$fileName." ".date('d.m.Y H:i:s')."\n\n";
 $i=$j=$k=$l=$cnt=0;
 $start = ($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 $count = 100;
@@ -63,7 +63,7 @@ if ($arXMLids) {
       }
     }
 
-    if ($arInfo[$arElement['XML_ID']]['TEXT'] && !$arElement['DETAIL_TEXT']) {
+    if ($arInfo[$arElement['XML_ID']]['TEXT']) { //  && !$arElement['DETAIL_TEXT']
       $DETAIL_TEXT = file_get_contents($arInfo[$arElement['XML_ID']]['TEXT']);
       $arLoadProductArray['DETAIL_TEXT'] = $DETAIL_TEXT;
       $k++;
@@ -71,9 +71,9 @@ if ($arXMLids) {
 
     if (!empty($arLoadProductArray)) { $i++;
       if ($el->Update($arElement['ID'],$arLoadProductArray))
-        echo $arElement['XML_ID'].' ('.$arElement['NAME'].') - успешно обновлено!<br>';
+        $strCSV .= $arElement['XML_ID']." (".$arElement['NAME'].") - успешно обновлено!\n";
       else
-        echo 'Ошибка: '.$arElement['XML_ID'].' ('.$arElement['NAME'].') - '.$el->LAST_ERROR.'<br>';
+        $strCSV .= "Ошибка: ".$arElement['XML_ID']." (".$arElement['NAME'].") - ".$el->LAST_ERROR."\n";
     }
     unset($arLoadProductArray);
 
@@ -84,12 +84,21 @@ if ($arXMLids) {
   }
 }
 
-echo "Всего товаров: ".$l."<br>";
-echo "Всего обновлено товаров: ".$i."<br>";
-echo "Всего обновлено изображений: ".$j."<br>";
-echo "Всего обновлено описаний: ".$k."<br>";
+$strCSV .= "\nВсего товаров: ".$l."\n";
+$strCSV .= "Всего обновлено товаров: ".$i."\n";
+$strCSV .= "Всего обновлено изображений: ".$j."\n";
+$strCSV .= "Всего обновлено описаний: ".$k."\n---\n";
+
+// echo str_replace("\n","<br>",$strCSV);
+
 if ($start < 40000):?>
   <script type="text/javascript">
     document.location.href = 'https://www.dev.farmlavka.ru/local/cron/import_Wshop.php?start=<?=$start+$count?>';
   </script>
-<?endif;?>
+<?else:
+  $strCSV = "import ".$fileName." ".date('d.m.Y H:i:s')."\n";
+  // запишем в файл
+  $fp = fopen($_SERVER["DOCUMENT_ROOT"].'/local/cron/import.csv', 'a+');
+  fwrite($fp,$strCSV);
+  fclose($fp);
+endif;?>

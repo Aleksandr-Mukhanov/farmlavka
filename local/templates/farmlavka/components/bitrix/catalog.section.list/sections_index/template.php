@@ -20,7 +20,7 @@ $i=0;
 ?>
 <div class="product-filter__blocks">
 	<?foreach ($arResult['MAIN'] as $section) { $i++;?>
-		<div class="product-filter__block product-filter__block-<?=$i?>">
+		<div class="product-filter__block">
 			<div class="product-filter__block__body">
 				<div class="product-filter__block__top">
 					<div class="svg product-filter__svg product-filter__svg-<?=$i?>">

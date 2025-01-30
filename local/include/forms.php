@@ -40,13 +40,13 @@
       <p class="popup-new__text">Оставьте ваши данные и мы свяжемся с вами. Мы не занимаемся рассылкой рекламных сообщений, а так же не передаем контактные данные третьим лицам </p>
       <div class="popup-new__form">
         <div class="popup-new__block-name">
-          <input class="popup-new__input popup-new__input-name" name="name" type="text" id="name" placeholder="Ваше имя"></input>
+          <input class="popup-new__input popup-new__input-name" name="name" type="text" placeholder="Ваше имя"></input>
         </div>
         <div class="popup-new__block-email">
-          <input class="popup-new__input popup-new__input-email" name="email" type="text" id="email" placeholder="Ваша почта"></input>
+          <input class="popup-new__input popup-new__input-email" name="email" type="email" placeholder="Ваша почта"></input>
         </div>
         <div class="popup-new__block-text">
-          <input class="popup-new__input popup-new__input-text" name="problem" type="text" id="text" placeholder="Отпишите свою проблему"></input>
+          <input class="popup-new__input popup-new__input-text" name="problem" type="text" placeholder="Отпишите свою проблему"></input>
         </div>
         <div class="popup-new__bottom-block">
           <button type='submit' class="popup-request button popup-new__button shadow_green">Напишите мне</button>
@@ -67,10 +67,10 @@
       <div class="popup-new__top">
         <div class="personal-area">
           <p class="popup-new__title">Войти</p>
-          <a class="personal-area__suptitle btnAuth" data-div="form-reg">Регистрация</a>
-          <a class="personal-area__suptitle btnAuth" data-div="form-restore">Восстановить пароль</a>
+          <a class="personal-area__suptitle btnAuth" data-block="form-reg">Регистрация</a>
+          <a class="personal-area__suptitle btnAuth" data-block="form-restore">Восстановить пароль</a>
         </div>
-        <a href="#" id="" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
+        <a href="javascript:void(0);" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
           <div class='svg popup-new__close__svg'></div>
         </a>
       </div>
@@ -96,11 +96,11 @@
     <div class="popup-new__body hide" id="form-reg">
       <div class="popup-new__top">
         <div class="personal-area">
-          <a class="personal-area__suptitle btnAuth" data-div="form-auth">Войти</a>
+          <a class="personal-area__suptitle btnAuth" data-block="form-auth">Войти</a>
           <p class="popup-new__title">Регистрация</p>
-          <a class="personal-area__suptitle btnAuth" data-div="form-restore">Восстановить пароль</a>
+          <a class="personal-area__suptitle btnAuth" data-block="form-restore">Восстановить пароль</a>
         </div>
-        <a href="#" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
+        <a href="javascript:void(0);" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
           <div class='svg popup-new__close__svg'></div>
         </a>
       </div>
@@ -130,11 +130,11 @@
     <div class="popup-new__body hide" id="form-restore">
       <div class="popup-new__top">
         <div class="personal-area">
-          <a class="personal-area__suptitle btnAuth" data-div="form-auth">Войти</a>
-          <a class="personal-area__suptitle btnAuth" data-div="form-reg">Регистрация</a>
+          <a class="personal-area__suptitle btnAuth" data-block="form-auth">Войти</a>
+          <a class="personal-area__suptitle btnAuth" data-block="form-reg">Регистрация</a>
           <p class="popup-new__title">Восстановить пароль</p>
         </div>
-        <a href="#" id="" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
+        <a href="javascript:void(0);" data-modal="myModal2" class="close popup__close close-popup close-popup_request popup-new__close">
           <div class='svg popup-new__close__svg'></div>
         </a>
       </div>
@@ -163,7 +163,7 @@
           <p class="popup-new__title">Регистрация</p>
           <a class="personal-area__suptitle myBtn" data-modal="myModal2">Войти</a>
         </div>
-        <a href="#" data-modal="myModal3" class="close popup__close close-popup close-popup_request popup-new__close">
+        <a href="javascript:void(0);" data-modal="myModal3" class="close popup__close close-popup close-popup_request popup-new__close">
           <div class='svg popup-new__close__svg'></div>
         </a>
       </div>
@@ -209,7 +209,7 @@
       <div class="order">
         <div class="product-card__block__img">
           <div class="product-card__img order__left__img">
-            <img src="./img/main-content/product-4.jpg" id="oneClickIMG">
+            <img src="<?=SITE_TEMPLATE_PATH?>/img/main-content/product-4.jpg" id="oneClickIMG">
           </div>
         </div>
         <div class="order__right">
@@ -342,10 +342,10 @@
       <p class="popup-new__text">Оставьте ваши данные и мы свяжемся с вами. Мы не занимаемся рассылкой рекламных сообщений, а так же не передаем контактные данные третьим лицам </p>
       <div class="popup-new__form call-back__form">
         <div class="popup-new__block-name">
-          <input class="popup-new__input popup-new__input-name" name="name" type="text" id="name" placeholder="Ваше имя"></input>
+          <input class="popup-new__input popup-new__input-name" name="name" type="text" placeholder="Ваше имя"></input>
         </div>
         <div class="popup-new__block-email">
-          <input class="popup-new__input popup-new__input-email" name="tell" type="text" id="tell" placeholder="Телефон"></input>
+          <input class="popup-new__input popup-new__input-email" name="phone" type="tel" placeholder="Телефон"></input>
         </div>
         <div class="popup-new__bottom-block">
           <button type='submit' class="popup-request button call-back__button shadow_green">Перезвоните мне</button>

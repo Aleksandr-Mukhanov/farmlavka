@@ -100,7 +100,9 @@ if (empty($arResult['ERROR_MESSAGE']))
 							foreach ($item['COLUMN_LIST'] as $prop) {
 								if ($prop['CODE'] == 'PROPERTY_RATING_VALUE') $rating = $prop['VALUE'];
 								else $arProp[$prop['NAME']] = $prop['VALUE'];
-						}?>
+							}
+							$picture = ($item['IMAGE_URL']) ? $item['IMAGE_URL'] : SITE_TEMPLATE_PATH.'/img/no-photo.jpeg';
+					?>
 						<li class="b-main__left__item">
 							<div class="order b-order" data-id="<?=$item['PRODUCT_ID']?>">
 								<div class="b-order__delete cartEdit" data-action='cart_del_el'></div>
@@ -108,7 +110,7 @@ if (empty($arResult['ERROR_MESSAGE']))
 									<div class="product-card__block__img b-order__block-img">
 										<div class="product-card__img order__left__img b-order__img-item ">
 											<a href="<?=$item['DETAIL_PAGE_URL']?>">
-												<img class="b-order__img" src="<?=$item['IMAGE_URL']?>" alt="<?=$item['NAME']?>">
+												<img class="b-order__img" src="<?=$picture?>" alt="<?=$item['NAME']?>" title="<?=$item['NAME']?>">
 											</a>
 										</div>
 									</div>

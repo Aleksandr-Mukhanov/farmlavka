@@ -43,10 +43,10 @@ class farmlavka extends CBitrixComponent
         }
         $arOrder = ['SORT'=>'ASC'];
         $arFilter = ['IBLOCK_ID'=>1,'ID'=>$arItemIds];
-        $arSelect = ['ID','PREVIEW_PICTURE'];
+        $arSelect = ['ID','DETAIL_PICTURE'];
         $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
         while ($arElement = $rsElements->Fetch()) {
-            $arBasketItems[$arElement['ID']]['IMG'] = CFile::GetPath($arElement['PREVIEW_PICTURE']);
+            $arBasketItems[$arElement['ID']]['IMG'] = CFile::GetPath($arElement['DETAIL_PICTURE']);
         }
 
         // получим платежные системы
@@ -114,7 +114,7 @@ class farmlavka extends CBitrixComponent
             $arStoreAvail[$arStoreProduct['STORE_ID']][$arStoreProduct['PRODUCT_ID']] = $arStoreProduct['AMOUNT'];
         } // dump($arStoreAvail);
 
-        if($_REQUEST['SEND_ORDER'])
+        if($_REQUEST['SEND_ORDER'] && $basketFullPrice)
         {
             $orderFIO = $_REQUEST['orderFIO'];
             $orderMail = $_REQUEST['orderMail'];
@@ -125,7 +125,6 @@ class farmlavka extends CBitrixComponent
             $orderSQOffice = $_REQUEST['SQ_OFFICE'];
             $orderIntercomCode = $_REQUEST['INTERCOM_CODE'];
             $orderPaySystem = $_REQUEST['PAY_SYSTEM'];
-
 
             // привяжем к пользователю
             global $USER;
@@ -224,14 +223,15 @@ class farmlavka extends CBitrixComponent
 
             $order->doFinalAction(true);
             $result = $order->save();
-            if (!$result->isSuccess()) {
-                $arResult['RESULT'] = 'Ошибка создания заказа: '.$result->getErrors();
-            }else{
-                $arResult['RESULT'] = 'Заказ №'.$order->getId().' создан успешно!';
 
-                // для оплаты
-                $paySystemBufferedOutput = $paySystemService->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);
-                $arResult['PAYMENT_TEMPLATE'] = $paySystemBufferedOutput->getTemplate();
+            if (!$result->isSuccess()) {
+              $arResult['RESULT'] = 'Ошибка создания заказа: '.$result->getErrors();
+            }else{
+              $arResult['RESULT'] = 'Заказ №'.$order->getId().' создан успешно!';
+
+              // для оплаты
+              $paySystemBufferedOutput = $paySystemService->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);
+              $arResult['PAYMENT_TEMPLATE'] = $paySystemBufferedOutput->getTemplate();
             }
         }
 

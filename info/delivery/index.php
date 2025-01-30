@@ -242,7 +242,7 @@ while($arStore = $rsStore->fetch())
             <div class="address__td__block" >
               <div class="address__td-bank">
                 <!-- <img src="./img/svg/bank-2.svg" class="address__td-img" width="90px" height="16px" > -->
-                <?=implode(', ', $store['UF_CARD_NAME'])?>
+                <?=($store['UF_CARD_NAME'])?implode(', ', $store['UF_CARD_NAME']):'-'?>
               </div>
             </div>
           </td>

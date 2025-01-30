@@ -1100,8 +1100,8 @@ h5 {
   .header__top__flex__block {
     width: 100%;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-around;
     font-size: 12px;
   }
 
@@ -1211,7 +1211,7 @@ h5 {
 
   .header__bottom__flex__block {
     background-color: white;
-    padding: 0px 20px;
+    /* padding: 0px 20px; */
   }
 
   .header__city__text__bottom {
@@ -4866,12 +4866,14 @@ ul.company__text li::after {
 .product-filter__blocks {
   margin-top: 70px;
   display: -ms-grid;
-  display: grid;
+  /* display: grid; */
+  display: flex;
   -ms-grid-columns: 1fr 30px 1fr 30px 1fr 30px 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   -ms-grid-rows: 1fr 30px 1fr 30px 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-      grid-template-areas: "a b c d" "a b e f" "a g h i";
+  /* grid-template-rows: 1fr 1fr 1fr; */
+  grid-template-rows: 1fr;
+  grid-template-areas: "a b c d" "a b e f" "a g h i";
   grid-gap: 30px;
 }
 .product-filter__blocks .product-filter__block {
@@ -5163,7 +5165,8 @@ ul.company__text li::after {
   .product-filter__blocks {
     margin-top: 60px;
     display: -ms-grid;
-    display: grid;
+    /* display: grid; */
+    display: flex;
     -ms-grid-columns: 1fr 30px 1fr 30px 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     -ms-grid-rows: 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr;
@@ -5300,7 +5303,8 @@ ul.company__text li::after {
   .product-filter__blocks {
     margin-top: 60px;
     display: -ms-grid;
-    display: grid;
+    /* display: grid; */
+    display: flex;
     -ms-grid-columns: 1fr 30px 1fr;
     grid-template-columns: 1fr 1fr;
     -ms-grid-rows: 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr;

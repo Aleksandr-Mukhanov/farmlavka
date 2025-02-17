@@ -9135,21 +9135,21 @@ section.range-slider input[type=range]::-moz-focus-outer {
 .cp-license {
   display: block;
   max-width: 1024px;
-  height: 727px;
+  /* height: 727px; */
   margin: 0 auto;
   margin-top: 60px;
 }
 
 .our-license__block-img {
   max-width: 1500px;
-  height: 1074px;
+  /* height: 1074px; */
   margin: 0 auto;
   margin-top: 60px;
 }
 
 .cp-license__block {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   position: relative;
 }
 

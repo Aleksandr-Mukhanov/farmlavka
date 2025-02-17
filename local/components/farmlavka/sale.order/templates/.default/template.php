@@ -79,16 +79,16 @@ global $USER;
 					<h3 class="footer__question__title">Доставка</h3>
 					<div class="checkout__ch-delivery">
 						<div class="ch-delivery__buttons" >
+							<!-- <div class="ch-delivery__button-block">
+								<button class="button ch-delivery__button" data-id="<?=$arResult['DELIVERY'][0]['ID']?>" data-type="delivery">доставка</button>
+							</div> -->
 							<div class="ch-delivery__button-block">
-								<button class="button ch-delivery__button active" data-id="<?=$arResult['DELIVERY'][0]['ID']?>" data-type="delivery">доставка</button>
-							</div>
-							<div class="ch-delivery__button-block">
-								<button class="button ch-delivery__button" data-id="<?=$arResult['DELIVERY'][1]['ID']?>" data-type="pickup">самовывоз</button>
+								<button class="button ch-delivery__button active" data-id="<?=$arResult['DELIVERY'][1]['ID']?>" data-type="pickup">самовывоз</button>
 							</div>
 						</div>
 						<input type="hidden" name="DELIVERY_ID" id="deliveryID">
 					</div>
-					<div class="checkout__ch-delivery blockDelivery">
+					<div class="checkout__ch-delivery blockDelivery hide">
 						<p class="ch-delivery__text" >Выберите адрес из списка или добавьте новый:</p>
 						<li class="availability__item">
 							<input class="availability__item__input" type="radio" id="addressNew" name="ADDRESS_NEW" value="Y">
@@ -125,7 +125,7 @@ global $USER;
 						</div>
 					</div>
 				</div>
-				<div class="checkout__ch-way blockDelivery hide">
+				<div class="checkout__ch-way blockDelivery">
 					<div class="checkout__ch-order ch-confirm__body">
 						<h3 class="footer__question__title padding-none">Самовывоз</h3>
 	          <?$APPLICATION->IncludeComponent(
@@ -280,7 +280,7 @@ global $USER;
 						<ul class="availability__items">
 							<?foreach ($arResult['PAY_SYSTEM'] as $paySystemID => $paySystemName) {?>
 								<li class="availability__item">
-									<input class="availability__item__input" type="radio" id="paySystem_<?=$paySystemID?>" name="PAY_SYSTEM" value="<?=$paySystemID?>" required>
+									<input class="availability__item__input" type="radio" id="paySystem_<?=$paySystemID?>" name="PAY_SYSTEM" value="<?=$paySystemID?>" required checked>
 									<label class="availability__item__label ch-way__label " for="paySystem_<?=$paySystemID?>">
 										<?=$paySystemName?>
 									</label>

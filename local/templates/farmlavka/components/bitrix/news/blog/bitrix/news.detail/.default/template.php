@@ -57,7 +57,7 @@
 					<p class="a-content_top__text-2"><a href="<?=$arResult['SECTION']['PATH'][0]['SECTION_PAGE_URL']?>"><?=$arResult['SECTION']['PATH'][0]['NAME']?></a></p>
 				</div>
 				<div class="a-content_top__block-2">
-					<div class="tags a-content_top__tags">
+					<!-- <div class="tags a-content_top__tags">
 
 						<?foreach ($arResult['DISPLAY_PROPERTIES']['TAGS']['VALUE'] as $key => $tag) {?>
 
@@ -65,7 +65,7 @@
 
 						<?}?>
 
-					</div>
+					</div> -->
 				</div>
 				<div class="a-content_top__block-3">
 					<div class="product-card__top">

@@ -150,12 +150,12 @@ $picture = ($arResult['DETAIL_PICTURE']['SRC']) ? $arResult['DETAIL_PICTURE']['S
 							<!-- <div class="section__title pp-button-block__link pp-button-block__link_2" ><p>Условия хранения</p></div> -->
 						</div>
 						<div class="pp-button-block__pp-block-1" >
-							<?if($arResult['PROPERTIES']['RECEPT']['VALUE']):?>
+							<?/*if($arResult['PROPERTIES']['RECEPT']['VALUE']):?>
 								<div class="pp-block-1__body pp-block-1__body_1" >
 								  <p class="pp-block-1__body__text pp-block-1__body__text_1" >Продается только по рецепту</p>
 								  <p class="pp-block-1__body__text-bottom" >Товары требующие рецепт - <span class="pp-block-1__body__text__span" >не отправляются почтой.</span></p>
 								</div>
-							<?endif;?>
+							<?endif;*/?>
 							<div class="pp-block-1__body " >
 							  <p class="pp-block-1__body__text pp-block-1__body__text_2" ><?=$_SESSION["SOTBIT_REGIONS"]['NAME']?></p>
 							  <p class="pp-block-1__body__text-bottom">

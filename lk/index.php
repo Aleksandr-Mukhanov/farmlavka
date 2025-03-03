@@ -84,10 +84,10 @@ while ($arItems = $dbBasketItems->Fetch())
 // получим фото товаров
 $arOrder = ['SORT'=>'ASC'];
 $arFilter = ['IBLOCK_ID'=>1,'ID'=>$arItemIds];
-$arSelect = ['ID','PREVIEW_PICTURE'];
+$arSelect = ['ID','DETAIL_PICTURE'];
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while ($arElement = $rsElements->Fetch()) {
-  $arBasketItems[$arElement['ID']]['IMG'] = CFile::GetPath($arElement['PREVIEW_PICTURE']);
+  $arBasketItems[$arElement['ID']]['IMG'] = ($arElement['DETAIL_PICTURE']) ? CFile::GetPath($arElement['DETAIL_PICTURE']) : SITE_TEMPLATE_PATH.'/img/no-photo.jpeg';
 }
 // dump($arOrderItems);
 ?>

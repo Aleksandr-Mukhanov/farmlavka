@@ -1,7 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 // получим разделы
-$arOrder = ['SORT'=>'ASC'];
+$arOrder = ['NAME'=>'ASC'];
 $arFilter = ['IBLOCK_ID'=>1,'ACTIVE'=>'Y'];
 $arSelect = ['ID','NAME','IBLOCK_SECTION_ID','SECTION_PAGE_URL'];
 $rsSections = CIBlockSection::GetList($arOrder,$arFilter,false,$arSelect,false);

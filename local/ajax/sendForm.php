@@ -81,7 +81,7 @@ elseif ($action == 'sendReview') // отзыв
 
   $result = $entity_data_class::add($arField);
   $ID = $result->getId();
-  if ($ID) echo 'Отзыв успешно добавлен!';
+  if ($ID) echo 'Отзыв на модерации!';
   else echo 'Ошибка добавления отзыва!';
 }
 elseif ($action == 'reviewLike') // лайк отзыва

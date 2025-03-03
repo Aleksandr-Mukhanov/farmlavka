@@ -46,7 +46,7 @@ class farmlavka extends CBitrixComponent
         $arSelect = ['ID','DETAIL_PICTURE'];
         $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
         while ($arElement = $rsElements->Fetch()) {
-            $arBasketItems[$arElement['ID']]['IMG'] = CFile::GetPath($arElement['DETAIL_PICTURE']);
+            $arBasketItems[$arElement['ID']]['IMG'] = ($arElement['DETAIL_PICTURE']) ? CFile::GetPath($arElement['DETAIL_PICTURE']) : SITE_TEMPLATE_PATH.'/img/no-photo.jpeg';
         }
 
         // получим платежные системы

@@ -34,15 +34,14 @@ global $USER;
 				<div class="checkout__ch-order">
 					<h3 class="footer__question__title">Ваш заказ</h3>
 					<table class="ch-order__table">
-						<?foreach ($arResult['BASKET'] as $itemID => $arItem) {
-							$picture = ($arItem['IMG']) ? $arItem['IMG'] : SITE_TEMPLATE_PATH.'/img/no-photo.jpeg';?>
+						<?foreach ($arResult['BASKET'] as $itemID => $arItem) {?>
 							<tr class="ch-order__tr" >
 								<td class="ch-order__td" >
 									<div class="b-order__right">
 									<div class="product-card__block__img b-order__block-img">
 										<div class="product-card__img ch-order__p-img ">
 											<a href="<?=$arItem['URL']?>">
-												<img class="b-order__img ch-order__img" src="<?=$picture?>" alt="<?=$arItem['NAME']?>" title="<?=$arItem['NAME']?>">
+												<img class="b-order__img ch-order__img" src="<?=$arItem['IMG']?>" alt="<?=$arItem['NAME']?>" title="<?=$arItem['NAME']?>">
 											</a>
 										</div>
 									</div>
@@ -171,12 +170,12 @@ global $USER;
 							<a href="#" class="tag store_avail active" data-avail="all">
 								<p class="tag__text">Все аптеки</p>
 							</a>
-							<a href="#" class="tag store_avail" data-avail="14">
+							<!-- <a href="#" class="tag store_avail" data-avail="14">
 								<p class="tag__text">Забрать за час</p>
 							</a>
 							<a href="#" class="tag store_avail" data-avail="15">
 								<p class="tag__text">Сегодня</p>
-							</a>
+							</a> -->
 						</div>
 						<div class="l-address">
 							<table class="address__table">

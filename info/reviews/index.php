@@ -186,7 +186,7 @@ $rating = round($scoreSum / count($arReview),2);
 										<?}?>
 									</div>
 								</div>
-								<div class="people-review__like-block" data-id="<?=$review['ID']?>">
+								<!-- <div class="people-review__like-block" data-id="<?=$review['ID']?>">
 									<a href="#" class="like-block__text like-block__text__like reviewLike" data-type="like">
 										<?=$review['UF_LIKE']?>
 										<div class="like"></div>
@@ -195,7 +195,7 @@ $rating = round($scoreSum / count($arReview),2);
 										<?=$review['UF_DISLIKE']?>
 										<div class="dislike"></div>
 									</a>
-								</div>
+								</div> -->
 							</div>
 							<p class="review__text">
 								<?=$review['UF_TEXT']?>

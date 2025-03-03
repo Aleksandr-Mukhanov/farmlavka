@@ -41,6 +41,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 $(document).ready(function(){
 
+  // кнопка вверх
+  $('.wrapper-top__block').on('click', function(event){
+  	event.preventDefault();
+  	$('body,html').animate({
+  		scrollTop: 0,
+  		}, 700
+  	);
+  });
+
+  // кнопка вниз
+  $('.vector-bottom').on('click', function(event){
+  	event.preventDefault();
+  	$('body,html').animate({
+  		scrollTop: $(document).height() - $(window).height(),
+  		}, 700
+  	);
+  });
+
   // маска на телефон
   $('.phoneMask').mask('+7 (999) 999-99-99');
 
@@ -298,7 +316,7 @@ $(document).ready(function(){
 		var form = $(this);
     name = form.find('input[name="name"]').val();
     email = form.find('input[name="email"]').val();
-    text = form.find('input[name="text"]').val();
+    text = form.find('textarea[name="text"]').val();
     score = form.find('input[name="score"]').val();
     city = form.find('input[name="city"]').val();
 

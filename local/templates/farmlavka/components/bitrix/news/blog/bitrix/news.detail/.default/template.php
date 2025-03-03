@@ -137,11 +137,7 @@
 					<a href="<?=$arResult['RELATED_PROD'][0]['DETAIL_PAGE_URL']?>" class="product-card note-card">
 						<div class="product-card__block__img">
 							<div class="product-card__img after-none ">
-								<?
-								$arFile1 = CFile::GetFileArray($arResult['RELATED_PROD'][0]['XML_ID']);
-								$arFile2 = CFile::GetFileArray($arResult['RELATED_PROD'][1]['XML_ID']);
-								?>
-								<img src="<?=$arFile1['SRC']?>" alt="таблетка">
+								<img src="<?=$arResult['RELATED_PROD'][0]['IMAGE']?>" alt="таблетка">
 							</div>
 						</div>
 						<div class="product-card__body">
@@ -165,7 +161,7 @@
 					<a href="<?=$arResult['RELATED_PROD'][1]['DETAIL_PAGE_URL']?>" class=" product-card note-card">
 						<div class="product-card__block__img">
 							<div class="product-card__img after-none">
-								<img src="<?=$arFile2['SRC']?>" alt="таблетка">
+								<img src="<?=$arResult['RELATED_PROD'][1]['IMAGE']?>" alt="таблетка">
 							</div>
 						</div>
 						<div class="product-card__body">

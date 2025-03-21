@@ -60,14 +60,14 @@ $coupon = 'SL-5WFJS-EMD4IO2S';
 // else
 // 	echo 'no mail';
 
-$orderID = 320;
-$order = Order::load($orderID);
-$paymentCollection = $order->getPaymentCollection();
-foreach ($paymentCollection as $payment) {
-  $psID = $payment->getPaymentSystemId(); dump($psID);
-  $paySystemObject = PaySystem\Manager::getObjectById($psID); // dump($paySystemObject);
-  $paySystemBufferedOutput = $paySystemObject->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);
-  dump($paySystemBufferedOutput);
-  $arDate['url_pay'] = $paySystemBufferedOutput->getTemplate();
-  dump($arDate);
-}
+// $orderID = 320;
+// $order = Order::load($orderID);
+// $paymentCollection = $order->getPaymentCollection();
+// foreach ($paymentCollection as $payment) {
+//   $psID = $payment->getPaymentSystemId(); dump($psID);
+//   $paySystemObject = PaySystem\Manager::getObjectById($psID); // dump($paySystemObject);
+//   $paySystemBufferedOutput = $paySystemObject->initiatePay($payment, null, PaySystem\BaseServiceHandler::STRING);
+//   dump($paySystemBufferedOutput);
+//   $arDate['url_pay'] = $paySystemBufferedOutput->getTemplate();
+//   dump($arDate);
+// }

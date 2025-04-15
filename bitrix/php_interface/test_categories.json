@@ -1,0 +1,18 @@
+[
+{
+"id": "30001",
+"name": "Аллергия - Таблетки",
+"parent_id": "100001",
+"is_last": true,
+"image": "",
+"is_active": true
+},
+{
+"id": "30056",
+"name": "Аллергия - Мази, гели",
+"parent_id": "100001",
+"is_last": true,
+"image": "",
+"is_active": true
+}
+]

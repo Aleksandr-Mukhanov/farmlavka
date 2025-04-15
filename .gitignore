@@ -1,2 +1,5 @@
 /bitrix/
 /upload/
+!/bitrix/php_interface/
+!/bitrix/templates/
+*.sql
